@@ -3,6 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Security
+NclArchiveApi/AppSettings.config
+NclArchiveApi/ConnectionString.config
+
 # User-specific files
 *.suo
 *.user
