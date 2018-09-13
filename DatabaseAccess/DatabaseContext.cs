@@ -9,5 +9,14 @@ namespace DatabaseAccess
             : base("name=NclArchive")
         {
         }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            Database.SetInitializer<DatabaseContext>(null);
+            base.OnModelCreating(modelBuilder);
+        }
+
+        public DbSet<InternalModel.Club> Clubs { get; set; }
+        public DbSet<InternalModel.Team> Teams { get; set; }
     }
 }
