@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace DatabaseAccess.Repositories
 {
-    public class ClubRepository
+    public class ClubRepository : IClubRepository
     {
         public async Task<ReadOnlyCollection<ExternalModel.AllClubsResult>> GetAllClubsAsync()
         {

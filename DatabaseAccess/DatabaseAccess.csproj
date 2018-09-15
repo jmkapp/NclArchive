@@ -58,6 +58,8 @@
     <Compile Include="InternalModel\TeamsInClubResultcs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ClubRepository.cs" />
+    <Compile Include="Repositories\IClubRepository.cs" />
+    <Compile Include="Repositories\ITeamRepository.cs" />
     <Compile Include="Repositories\TeamRepository.cs" />
   </ItemGroup>
   <ItemGroup>
