@@ -17,7 +17,15 @@ namespace NclArchiveApi.Controllers
 {
     public class ClubController : ApiController
     {
+        private readonly IClubRepository _clubRepository;
+        private readonly ITeamRepository _teamRepository;
         private readonly string _password = WebConfigurationManager.AppSettings["ApiPassword"];
+
+        public ClubController(IClubRepository clubRepository, ITeamRepository teamRepository)
+        {
+            _clubRepository = clubRepository;
+            _teamRepository = teamRepository;
+        }
 
         [Route("clubs")]
         [HttpGet]
@@ -34,9 +42,7 @@ namespace NclArchiveApi.Controllers
             if (password != _password)
                 return Content(HttpStatusCode.Unauthorized, "Authorization failed for this resource.");
 
-            ClubRepository repository = new ClubRepository();
-
-            ReadOnlyCollection<AllClubsResult> clubs = await repository.GetAllClubsAsync();
+            ReadOnlyCollection<AllClubsResult> clubs = await _clubRepository.GetAllClubsAsync();
 
             List<Club> newClubs = new List<Club>();
 
@@ -74,11 +80,9 @@ namespace NclArchiveApi.Controllers
             if (password != _password)
                 return Content(HttpStatusCode.Unauthorized, "Authorization failed for this resource.");
 
-            ClubRepository repository = new ClubRepository();
-            DatabaseAccess.ExternalModel.Club databaseClub = await repository.GetClubAsync(clubId);
+            DatabaseAccess.ExternalModel.Club databaseClub = await _clubRepository.GetClubAsync(clubId);
 
-            TeamRepository teamRepository = new TeamRepository();
-            ReadOnlyCollection<TeamsInClubResult> databaseTeams = await teamRepository.GetTeamsInClubAsync(clubId);
+            ReadOnlyCollection<TeamsInClubResult> databaseTeams = await _teamRepository.GetTeamsInClubAsync(clubId);
 
             List<Models.Team> newTeams = new List<Models.Team>();
 
