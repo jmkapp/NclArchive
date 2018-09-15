@@ -26,5 +26,7 @@ namespace NclArchiveApi.Models
         public string MiniName { get; set; }
         [JsonProperty(PropertyName = "link")]
         public string Link { get; set; }
+        [JsonProperty(PropertyName = "club")]
+        public Club Club { get; set; }
     }
 }

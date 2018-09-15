@@ -1,10 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DatabaseAccess.InternalModel
 {
     [Table("dbo.Tbl_Clubs")]
     internal class Club
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
         public int ClubId { get; set; }
         public string ShortName { get; set; }
         public string LongName { get; set; }

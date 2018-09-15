@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace DatabaseAccess.Repositories
 {
     public class ClubRepository : IClubRepository
-    {
+    { 
         public async Task<ReadOnlyCollection<ExternalModel.AllClubsResult>> GetAllClubsAsync()
         {
             List<ExternalModel.AllClubsResult> clubs = new List<ExternalModel.AllClubsResult>();
@@ -43,23 +43,7 @@ namespace DatabaseAccess.Repositories
 
                 if (club != null)
                 {
-                    newClub = new ExternalModel.Club(
-                        club.ClubId.ToString(),
-                        club.ShortName,
-                        club.LongName,
-                        club.Description,
-                        club.VenueId.ToString(),
-                        club.Url,
-                        club.ImageFile,
-                        club.ContactName,
-                        club.AddressLine1,
-                        club.AddressLine2,
-                        club.AddressLine3,
-                        club.Postcode,
-                        club.Telephone,
-                        club.Fax,
-                        club.CustomerId.ToString(),
-                        club.AssociationId.ToString());
+                    newClub = ExternalModel.Club.Convert(club);
                 }
             }
 

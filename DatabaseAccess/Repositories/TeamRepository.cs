@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 
@@ -7,6 +8,38 @@ namespace DatabaseAccess.Repositories
 {
     public class TeamRepository : ITeamRepository
     {
+        public async Task<ExternalModel.Team> GetTeamAsync(string teamReference)
+        {
+            ExternalModel.Team newTeam = null;
+
+            bool converts = int.TryParse(teamReference, out int teamId);
+
+            if (converts == false)
+                return null;
+
+            using (var context = new DatabaseContext())
+            {
+                InternalModel.Team team = await context.Teams.Include(cl => cl.Club).SingleOrDefaultAsync(tm => tm.TeamId == teamId);
+
+                if (team != null)
+                {
+                    newTeam = new ExternalModel.Team(
+                        team.TeamId.ToString(),
+                        ExternalModel.Club.Convert(team.Club),
+                        team.ShortName,
+                        team.LongName,
+                        team.TeamRef,
+                        team.IsDirty.ToString(),
+                        team.Url,
+                        team.SponsorsName,
+                        team.SponsorsUrl,
+                        team.MiniName);
+                }
+
+                return newTeam;
+            }
+        }
+
         public async Task<ReadOnlyCollection<ExternalModel.TeamsInClubResult>> GetTeamsInClubAsync(string clubId)
         {
             List<ExternalModel.TeamsInClubResult> teams = new List<ExternalModel.TeamsInClubResult>();

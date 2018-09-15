@@ -135,6 +135,28 @@
         {
             get { return _associationId; }
         }
+
+        internal static Club Convert(InternalModel.Club club)
+        {
+            return new Club(
+                club.ClubId.ToString(),
+                club.ShortName,
+                club.LongName,
+                club.Description,
+                club.VenueId.ToString(),
+                club.Url,
+                club.ImageFile,
+                club.ContactName,
+                club.AddressLine1,
+                club.AddressLine2,
+                club.AddressLine3,
+                club.Postcode,
+                club.Telephone,
+                club.Fax,
+                club.CustomerId.ToString(),
+                club.AssociationId.ToString()
+            );
+        }
     }
 }
 
