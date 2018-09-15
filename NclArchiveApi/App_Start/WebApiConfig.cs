@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Http;
+using Newtonsoft.Json;
 
 namespace NclArchiveApi
 {
@@ -12,10 +13,13 @@ namespace NclArchiveApi
 
             GlobalConfiguration.Configuration.Formatters.JsonFormatter.MediaTypeMappings
                 .Add(new System.Net.Http.Formatting.RequestHeaderMapping("Accept",
-                              "text/html",
-                              StringComparison.InvariantCultureIgnoreCase,
-                              true,
-                              "application/json"));
+                    "text/html",
+                    StringComparison.InvariantCultureIgnoreCase,
+                    true,
+                    "application/json"));
+
+            config.Formatters.JsonFormatter.SerializerSettings =
+                new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
 
             // Web API routes
             config.MapHttpAttributeRoutes();

@@ -1,20 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Reflection.Emit;
-using DatabaseAccess.InternalModel;
+using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace DatabaseAccess.Repositories
 {
     public class ClubRepository
     {
-        public ReadOnlyCollection<ExternalModel.AllClubsResult> GetAllClubs()
+        public async Task<ReadOnlyCollection<ExternalModel.AllClubsResult>> GetAllClubsAsync()
         {
             List<ExternalModel.AllClubsResult> clubs = new List<ExternalModel.AllClubsResult>();
 
             using (var context = new DatabaseContext())
             {
-                var databaseClubs = context.Database.SqlQuery<InternalModel.GetClubsResult>("dbo.api_GetAllClubs");
+                var databaseClubs = await context.Database.SqlQuery<InternalModel.GetClubsResult>("dbo.api_GetAllClubs").ToListAsync();
 
                 List<InternalModel.Club> clubsList = new List<InternalModel.Club>();
 
@@ -29,7 +28,7 @@ namespace DatabaseAccess.Repositories
             return new ReadOnlyCollection<ExternalModel.AllClubsResult>(clubs);
         }
 
-        public ExternalModel.Club GetClub(string clubReference)
+        public async Task<ExternalModel.Club> GetClubAsync(string clubReference)
         {
             ExternalModel.Club newClub = null;
 
@@ -40,7 +39,7 @@ namespace DatabaseAccess.Repositories
 
             using (var context = new DatabaseContext())
             {
-                InternalModel.Club club = context.Clubs.SingleOrDefault(cl => cl.ClubId == clubId);
+                InternalModel.Club club = await context.Clubs.SingleOrDefaultAsync(cl => cl.ClubId == clubId);
 
                 if (club != null)
                 {
@@ -68,3 +67,6 @@ namespace DatabaseAccess.Repositories
         }
     }
 }
+
+   
+
