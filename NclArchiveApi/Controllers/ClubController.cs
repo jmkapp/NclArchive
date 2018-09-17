@@ -52,6 +52,7 @@ namespace NclArchiveApi.Controllers
                 newClub.ShortName = club.ShortName;
                 newClub.LongName = club.LongName;
                 newClub.Link = baseUrl + "club/" + newClub.ClubId;
+                newClub.TeamsInClubLink = Url.Content("~/") + "club/" + newClub.ClubId + "/teams";
 
                 newClubs.Add(newClub);
             }
@@ -78,10 +79,6 @@ namespace NclArchiveApi.Controllers
 
             DatabaseAccess.ExternalModel.Club databaseClub = await _clubRepository.GetClubAsync(clubId);
 
-            ReadOnlyCollection<TeamsInClubResult> databaseTeams = await _teamRepository.GetTeamsInClubAsync(clubId);
-
-            List<Models.Team> newTeams = new List<Models.Team>();
-
             if (databaseClub == null)
                 return NotFound();
 
@@ -99,6 +96,28 @@ namespace NclArchiveApi.Controllers
             newClub.Telephone = databaseClub.Telephone;
             newClub.Fax = databaseClub.Fax;
             newClub.Link = Url.Content("~/") + "club/" + newClub.ClubId;
+            newClub.TeamsInClubLink = Url.Content("~/") + "club/" + newClub.ClubId + "/teams";
+
+            return Ok(newClub);
+        }
+
+        [Route("club/{clubId}/teams")]
+        [HttpGet]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        public async Task<IHttpActionResult> GetTeamsInClub(string clubId)
+        {
+            AuthenticationHeaderValue authenticationHeaderValue = Request.Headers.Authorization;
+            var userNamePasswordString = authenticationHeaderValue == null ? ":" :
+                Encoding.UTF8.GetString(Convert.FromBase64String(authenticationHeaderValue.Parameter));
+
+            Authorizer authorizer = new Authorizer(userNamePasswordString);
+
+            if (!authorizer.Authorized)
+                return Content(HttpStatusCode.Unauthorized, authorizer.RejectionMessage);
+
+            ReadOnlyCollection<TeamsInClubResult> databaseTeams = await _teamRepository.GetTeamsInClubAsync(clubId);
+
+            List<Models.Team> newTeams = new List<Models.Team>();
 
             foreach (TeamsInClubResult team in databaseTeams)
             {
@@ -112,9 +131,7 @@ namespace NclArchiveApi.Controllers
                 newTeams.Add(newTeam);
             }
 
-            newClub.Teams = newTeams;
-
-            return Ok(newClub);
+            return Ok(newTeams);
         }
     }
 }
