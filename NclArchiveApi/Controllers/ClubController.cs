@@ -52,7 +52,7 @@ namespace NclArchiveApi.Controllers
                 newClub.ShortName = club.ShortName;
                 newClub.LongName = club.LongName;
                 newClub.Link = baseUrl + "club/" + newClub.ClubId;
-                newClub.TeamsInClubLink = Url.Content("~/") + "club/" + newClub.ClubId + "/teams";
+                newClub.TeamsLink = Url.Content("~/") + "club/" + newClub.ClubId + "/teams";
 
                 newClubs.Add(newClub);
             }
@@ -96,7 +96,7 @@ namespace NclArchiveApi.Controllers
             newClub.Telephone = databaseClub.Telephone;
             newClub.Fax = databaseClub.Fax;
             newClub.Link = Url.Content("~/") + "club/" + newClub.ClubId;
-            newClub.TeamsInClubLink = Url.Content("~/") + "club/" + newClub.ClubId + "/teams";
+            newClub.TeamsLink = Url.Content("~/") + "club/" + newClub.ClubId + "/teams";
 
             return Ok(newClub);
         }

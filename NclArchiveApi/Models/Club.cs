@@ -40,7 +40,7 @@ namespace NclArchiveApi.Models
         public string AssociationId { get; set; }
         [JsonProperty(PropertyName = "link")]
         public string Link { get; set; }
-        [JsonProperty(PropertyName = "teamsInClubLink")]
-        public string TeamsInClubLink { get; set; }
+        [JsonProperty(PropertyName = "teamsLink")]
+        public string TeamsLink { get; set; }
     }
 }
