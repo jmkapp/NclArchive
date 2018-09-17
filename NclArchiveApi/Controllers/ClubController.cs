@@ -7,7 +7,6 @@ using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Configuration;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using DatabaseAccess.ExternalModel;
@@ -19,7 +18,6 @@ namespace NclArchiveApi.Controllers
     {
         private readonly IClubRepository _clubRepository;
         private readonly ITeamRepository _teamRepository;
-        private readonly string _password = WebConfigurationManager.AppSettings["ApiPassword"];
 
         public ClubController(IClubRepository clubRepository, ITeamRepository teamRepository)
         {
@@ -36,11 +34,10 @@ namespace NclArchiveApi.Controllers
             var userNamePasswordString = authenticationHeaderValue == null ? ":" :
                 Encoding.UTF8.GetString(Convert.FromBase64String(authenticationHeaderValue.Parameter));
 
-            string username = userNamePasswordString.Split(':')[0];
-            string password = userNamePasswordString.Split(':')[1];
+            Authorizer authorizer = new Authorizer(userNamePasswordString);
 
-            if (password != _password)
-                return Content(HttpStatusCode.Unauthorized, "Authorization failed for this resource.");
+            if (!authorizer.Authorized)
+                return Content(HttpStatusCode.Unauthorized, authorizer.RejectionMessage);
 
             ReadOnlyCollection<AllClubsResult> clubs = await _clubRepository.GetAllClubsAsync();
 
@@ -74,11 +71,10 @@ namespace NclArchiveApi.Controllers
             var userNamePasswordString = authenticationHeaderValue == null ? ":" :
                 Encoding.UTF8.GetString(Convert.FromBase64String(authenticationHeaderValue.Parameter));
 
-            string username = userNamePasswordString.Split(':')[0];
-            string password = userNamePasswordString.Split(':')[1];
+            Authorizer authorizer = new Authorizer(userNamePasswordString);
 
-            if (password != _password)
-                return Content(HttpStatusCode.Unauthorized, "Authorization failed for this resource.");
+            if (!authorizer.Authorized)
+                return Content(HttpStatusCode.Unauthorized, authorizer.RejectionMessage);
 
             DatabaseAccess.ExternalModel.Club databaseClub = await _clubRepository.GetClubAsync(clubId);
 

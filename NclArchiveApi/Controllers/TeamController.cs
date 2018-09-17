@@ -14,7 +14,6 @@ namespace NclArchiveApi.Controllers
     public class TeamController : ApiController
     {
         private readonly ITeamRepository _teamRepository;
-        private readonly string _password = WebConfigurationManager.AppSettings["ApiPassword"];
 
         public TeamController(ITeamRepository teamRepository)
         {
@@ -30,11 +29,10 @@ namespace NclArchiveApi.Controllers
             var userNamePasswordString = authenticationHeaderValue == null ? ":" :
                 Encoding.UTF8.GetString(Convert.FromBase64String(authenticationHeaderValue.Parameter));
 
-            string username = userNamePasswordString.Split(':')[0];
-            string password = userNamePasswordString.Split(':')[1];
+            Authorizer authorizer = new Authorizer(userNamePasswordString);
 
-            if (password != _password)
-                return Content(HttpStatusCode.Unauthorized, "Authorization failed for this resource.");
+            if (!authorizer.Authorized)
+                return Content(HttpStatusCode.Unauthorized, authorizer.RejectionMessage);
 
             DatabaseAccess.ExternalModel.Team databaseTeam = await _teamRepository.GetTeamAsync(teamId);
 
