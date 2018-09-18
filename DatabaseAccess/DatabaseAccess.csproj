@@ -50,10 +50,13 @@
     <Compile Include="DatabaseContext.cs" />
     <Compile Include="ExternalModel\AllClubsResult.cs" />
     <Compile Include="ExternalModel\Club.cs" />
+    <Compile Include="ExternalModel\Season.cs" />
     <Compile Include="ExternalModel\Team.cs" />
     <Compile Include="ExternalModel\TeamsInClubResult.cs" />
     <Compile Include="InternalModel\Club.cs" />
     <Compile Include="InternalModel\GetClubsResult.cs" />
+    <Compile Include="InternalModel\Season.cs" />
+    <Compile Include="InternalModel\SeasonsForTeamResult.cs" />
     <Compile Include="InternalModel\Team.cs" />
     <Compile Include="InternalModel\TeamsInClubResultcs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
