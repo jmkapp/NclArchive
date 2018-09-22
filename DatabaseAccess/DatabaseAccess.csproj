@@ -51,6 +51,7 @@
     <Compile Include="ExternalModel\AllClubsResult.cs" />
     <Compile Include="ExternalModel\Club.cs" />
     <Compile Include="ExternalModel\Season.cs" />
+    <Compile Include="ExternalModel\SeasonsForTeamResult.cs" />
     <Compile Include="ExternalModel\Team.cs" />
     <Compile Include="ExternalModel\TeamsInClubResult.cs" />
     <Compile Include="InternalModel\Club.cs" />

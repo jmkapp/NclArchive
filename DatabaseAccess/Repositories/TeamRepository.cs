@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using DatabaseAccess.ExternalModel;
 
 namespace DatabaseAccess.Repositories
 {
@@ -64,6 +65,34 @@ namespace DatabaseAccess.Repositories
             }
 
             return new ReadOnlyCollection<ExternalModel.TeamsInClubResult>(teams);
+        }
+
+        public async Task<ReadOnlyCollection<ExternalModel.SeasonsForTeamResult>> GetSeasonsForTeamsAsync(string teamReference)
+        {
+            List<ExternalModel.SeasonsForTeamResult> seasons = new List<ExternalModel.SeasonsForTeamResult>();
+
+            bool converts = int.TryParse(teamReference, out int teamId);
+
+            if (!converts) return null;
+
+            using (var context = new DatabaseContext())
+            {
+                var databaseSeasons = await context.Database.SqlQuery<InternalModel.SeasonsForTeamResult>(
+                    "dbo.api_GetNCLSeasonsForTeamID @teamId",
+                    new SqlParameter("teamId", teamId)).ToListAsync();
+
+
+                foreach (InternalModel.SeasonsForTeamResult season in databaseSeasons)
+                {
+                    ExternalModel.SeasonsForTeamResult newSeason = new ExternalModel.SeasonsForTeamResult(
+                        season.SeasonId.ToString(),
+                        season.ShortName);
+
+                    seasons.Add(newSeason);
+                }
+            }
+
+            return new ReadOnlyCollection<SeasonsForTeamResult>(seasons);
         }
     }
 }

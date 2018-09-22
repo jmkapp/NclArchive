@@ -7,5 +7,6 @@ namespace DatabaseAccess.Repositories
     {
         Task<ExternalModel.Team> GetTeamAsync(string teamReference);
         Task<ReadOnlyCollection<ExternalModel.TeamsInClubResult>> GetTeamsInClubAsync(string clubId);
+        Task<ReadOnlyCollection<ExternalModel.SeasonsForTeamResult>> GetSeasonsForTeamsAsync(string teamId);
     }
 }

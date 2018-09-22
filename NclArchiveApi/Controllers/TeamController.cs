@@ -1,12 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using DatabaseAccess.ExternalModel;
 using DatabaseAccess.Repositories;
 using NclArchiveApi.Models;
+using Club = NclArchiveApi.Models.Club;
+using Season = NclArchiveApi.Models.Season;
+using Team = NclArchiveApi.Models.Team;
 
 namespace NclArchiveApi.Controllers
 {
@@ -59,8 +65,56 @@ namespace NclArchiveApi.Controllers
             newTeam.SponsorUrl = databaseTeam.SponsorsUrl;
             newTeam.MiniName = databaseTeam.MiniName;
             newTeam.Link = Url.Content("~/") + "team/" + newTeam.TeamId;
+            newTeam.SeasonsLink = Url.Content("~/") + "team/" + newTeam.TeamId + "/seasons";
 
             return Ok(newTeam);
+        }
+
+        [Route("team/{teamId}/seasons")]
+        [HttpGet]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        public async Task<IHttpActionResult> GetSeasons(string teamId)
+        {
+            AuthenticationHeaderValue authenticationHeaderValue = Request.Headers.Authorization;
+            var userNamePasswordString = authenticationHeaderValue == null ? ":" :
+                Encoding.UTF8.GetString(Convert.FromBase64String(authenticationHeaderValue.Parameter));
+
+            Authorizer authorizer = new Authorizer(userNamePasswordString);
+
+            if (!authorizer.Authorized)
+                return Content(HttpStatusCode.Unauthorized, authorizer.RejectionMessage);
+
+            DatabaseAccess.ExternalModel.Team databaseTeam = await _teamRepository.GetTeamAsync(teamId);
+
+            if (databaseTeam == null) return NotFound();
+
+            ReadOnlyCollection<SeasonsForTeamResult> seasonsForTeamResults =
+                await _teamRepository.GetSeasonsForTeamsAsync(teamId);
+
+            Team team = new Team();
+            team.TeamId = databaseTeam.TeamId;
+            team.ShortName = databaseTeam.ShortName;
+            team.Link = Url.Content("~/") + "team/" + team.TeamId;
+
+            List<Season> seasons = new List<Season>();
+
+            if (seasonsForTeamResults == null)
+                return NotFound();
+
+            foreach (SeasonsForTeamResult result in seasonsForTeamResults)
+            {
+                Season newSeason = new Season();
+
+                newSeason.SeasonId = result.SeasonId;
+                newSeason.ShortName = result.ShortName;
+                newSeason.Link = Url.Content("~/") + "season/" + newSeason.SeasonId;
+
+                seasons.Add(newSeason);
+            }
+
+            team.Seasons = seasons;
+
+            return Ok(team);
         }
     }
 }

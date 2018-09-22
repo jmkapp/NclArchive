@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace NclArchiveApi.Models
 {
@@ -26,7 +28,11 @@ namespace NclArchiveApi.Models
         public string MiniName { get; set; }
         [JsonProperty(PropertyName = "link")]
         public string Link { get; set; }
+        [JsonProperty(PropertyName = "seasonsLink")]
+        public string SeasonsLink { get; set; }
         [JsonProperty(PropertyName = "club")]
         public Club Club { get; set; }
+        [JsonProperty(PropertyName = "seasons")]
+        public IEnumerable<Season> Seasons { get; set; }
     }
 }
