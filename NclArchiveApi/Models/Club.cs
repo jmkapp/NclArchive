@@ -42,5 +42,7 @@ namespace NclArchiveApi.Models
         public string Link { get; set; }
         [JsonProperty(PropertyName = "teamsLink")]
         public string TeamsLink { get; set; }
+        [JsonProperty(PropertyName = "teams")]
+        public IEnumerable<Team> Teams { get; set; }
     }
 }

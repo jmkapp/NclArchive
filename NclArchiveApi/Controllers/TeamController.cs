@@ -9,7 +9,6 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using DatabaseAccess.ExternalModel;
 using DatabaseAccess.Repositories;
-using NclArchiveApi.Models;
 using Club = NclArchiveApi.Models.Club;
 using Season = NclArchiveApi.Models.Season;
 using Team = NclArchiveApi.Models.Team;
@@ -97,9 +96,6 @@ namespace NclArchiveApi.Controllers
             team.Link = Url.Content("~/") + "team/" + team.TeamId;
 
             List<Season> seasons = new List<Season>();
-
-            if (seasonsForTeamResults == null)
-                return NotFound();
 
             foreach (SeasonsForTeamResult result in seasonsForTeamResults)
             {

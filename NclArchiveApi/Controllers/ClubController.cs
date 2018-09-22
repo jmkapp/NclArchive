@@ -115,7 +115,16 @@ namespace NclArchiveApi.Controllers
             if (!authorizer.Authorized)
                 return Content(HttpStatusCode.Unauthorized, authorizer.RejectionMessage);
 
+            DatabaseAccess.ExternalModel.Club databaseClub = await _clubRepository.GetClubAsync(clubId);
+
+            if (databaseClub == null) return NotFound();
+
             ReadOnlyCollection<TeamsInClubResult> databaseTeams = await _teamRepository.GetTeamsInClubAsync(clubId);
+
+            Club club = new Club();
+            club.ClubId = databaseClub.ClubId;
+            club.ShortName = databaseClub.ShortName;
+            club.Link = Url.Content("~/") + "club/" + club.ClubId;
 
             List<Models.Team> newTeams = new List<Models.Team>();
 
@@ -131,7 +140,9 @@ namespace NclArchiveApi.Controllers
                 newTeams.Add(newTeam);
             }
 
-            return Ok(newTeams);
+            club.Teams = newTeams;
+
+            return Ok(club);
         }
     }
 }
