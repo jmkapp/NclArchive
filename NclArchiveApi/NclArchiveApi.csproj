@@ -98,6 +98,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Authorizer.cs" />
     <Compile Include="Controllers\ClubController.cs" />
+    <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Global.asax.cs">
@@ -105,6 +106,7 @@
     </Compile>
     <Compile Include="Models\Club.cs" />
     <Compile Include="Models\ClubList.cs" />
+    <Compile Include="Models\Game.cs" />
     <Compile Include="Models\Resource.cs" />
     <Compile Include="Models\ResourceList.cs" />
     <Compile Include="Models\Season.cs" />

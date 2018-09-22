@@ -12,7 +12,7 @@ namespace NclArchiveApi.Models
         [JsonProperty(PropertyName = "longName")]
         public string LongName { get; set; }
         [JsonProperty(PropertyName = "nclTeam")]
-        public string NclTeam { get; set; }
+        public bool NclTeam { get; set; }
         [JsonProperty(PropertyName = "teamRef")]
         public string TeamRef { get; set; }
         [JsonProperty(PropertyName = "isDirty")]

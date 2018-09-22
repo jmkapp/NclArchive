@@ -133,7 +133,7 @@ namespace NclArchiveApi.Controllers
                 Models.Team newTeam = new Models.Team();
                 newTeam.TeamId = team.TeamId;
                 newTeam.ShortName = team.TeamName;
-                newTeam.NclTeam = team.NclTeam ? "true" : "false";
+                newTeam.NclTeam = team.NclTeam;
                 newTeam.LongName = team.LongName;
                 newTeam.Link = Url.Content("~/") + "team/" + newTeam.TeamId;
 

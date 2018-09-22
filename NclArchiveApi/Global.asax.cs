@@ -15,6 +15,7 @@ namespace NclArchiveApi
 
             container.Register<IClubRepository, ClubRepository>(Lifestyle.Singleton);
             container.Register<ITeamRepository, TeamRepository>(Lifestyle.Singleton);
+            container.Register<IGameRepository, GameRepository>(Lifestyle.Singleton);
 
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
 
