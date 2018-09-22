@@ -50,6 +50,7 @@
     <Compile Include="DatabaseContext.cs" />
     <Compile Include="ExternalModel\AllClubsResult.cs" />
     <Compile Include="ExternalModel\Club.cs" />
+    <Compile Include="ExternalModel\IArchiveItem.cs" />
     <Compile Include="ExternalModel\Season.cs" />
     <Compile Include="ExternalModel\SeasonsForTeamResult.cs" />
     <Compile Include="ExternalModel\Team.cs" />
@@ -63,10 +64,12 @@
     <Compile Include="InternalModel\TeamGameResult.cs" />
     <Compile Include="InternalModel\TeamsInClubResultcs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\CachedRepository.cs" />
     <Compile Include="Repositories\ClubRepository.cs" />
     <Compile Include="Repositories\GameRepository.cs" />
     <Compile Include="Repositories\IClubRepository.cs" />
     <Compile Include="Repositories\IGameRepository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\ITeamRepository.cs" />
     <Compile Include="Repositories\TeamRepository.cs" />
   </ItemGroup>
