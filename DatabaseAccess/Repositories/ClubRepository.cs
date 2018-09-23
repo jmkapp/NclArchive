@@ -15,8 +15,6 @@ namespace DatabaseAccess.Repositories
             {
                 var databaseClubs = await context.Database.SqlQuery<InternalModel.GetClubsResult>("dbo.api_GetAllClubs").ToListAsync();
 
-                List<InternalModel.Club> clubsList = new List<InternalModel.Club>();
-
                 foreach (InternalModel.GetClubsResult databaseClub in databaseClubs)
                 {
                     ExternalModel.AllClubsResult newClub = new ExternalModel.AllClubsResult(databaseClub.ClubId.ToString(), databaseClub.ShortName, databaseClub.LongName);
