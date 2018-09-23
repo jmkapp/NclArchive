@@ -7,10 +7,14 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using DatabaseAccess.ExternalModel;
 using DatabaseAccess.Repositories;
 using NclArchiveApi.Models;
+using Season = NclArchiveApi.Models.Season;
+using Team = NclArchiveApi.Models.Team;
 
 namespace NclArchiveApi.Controllers
 {
@@ -37,48 +41,54 @@ namespace NclArchiveApi.Controllers
             if (!authorizer.Authorized)
                 return Content(HttpStatusCode.Unauthorized, authorizer.RejectionMessage);
 
-            ReadOnlyCollection<DatabaseAccess.ExternalModel.TeamGameResult> results = await _gameRepository.GetGamesAsync(teamId, seasonId);
+            ReadOnlyCollection<TeamGameResult> results = await _gameRepository.GetGamesAsync(teamId, seasonId);
 
             List<Game> games = new List<Game>();
 
-            foreach (DatabaseAccess.ExternalModel.TeamGameResult result in results)
+            foreach (TeamGameResult result in results)
             {
-                Game game = new Game();
-                game.GameId = result.GameId;
-                game.GameType = result.GameType;
-                game.ShortName = result.ShortName;
-                game.HomeTeamId = result.HomeTeamId;
-                game.AwayTeamId = result.AwayTeamId;
-                game.HomeTeamHtScore = result.HomeTeamHtScore;
-                game.AwayTeamHtScore = result.AwayTeamHtScore;
-                game.HomeTeamScore = result.HomeTeamScore;
-                game.AwayTeamScore = result.AwayTeamScore;
-                game.GameDate = result.GameDate;
-                game.VenueId = result.VenueId;
-                game.RefereeId = result.RefereeId;
-                game.Line1Id = result.Line1Id;
-                game.Line2Id = result.Line2Id;
-                game.DivisionId = result.DivisionId;
-                game.CompCupPoId = result.CompCupPoId;
-                game.GameTypeId = result.GameTypeId;
-                game.Status = result.Status;
-                game.Ddate = result.DDate;
-                game.Ttime = result.TTime;
-                game.GameStatus = result.GameStatus;
-                game.Comp = result.Comp;
-                game.CompUrl = result.CompUrl;
-                game.seasonId = result.SeasonId;
-                game.DivisionName = result.DivisionName;
-                game.SeasonName = result.SeasonName;
-                game.HomeNclTeam = result.HomeNclTeam;
-                game.AwayNclTeam = result.AwayNclTeam;
-                game.LongHomeTeam = result.LongHomeTeam;
-                game.LongAwayTeam = result.LongAwayTeam;
+                Game game = Game.Convert(result);
 
+                if (result.Season != null)
+                {
+                    Season season = new Season();
+                    season.SeasonId = result.Season.SeasonId;
+                    season.ShortName = result.Season.ShortName;
+                    season.WinterSeason = null;
+                    season.Link = Url.Content("~/") + "season/" + result.Season.SeasonId;
+
+                    game.Season = season;
+
+                }
+
+                if (result.HomeTeam != null)
+                {
+                    Team homeTeam = new Team();
+                    homeTeam.TeamId = result.HomeTeam.TeamId;
+                    homeTeam.ShortName = result.HomeTeam.ShortName;
+                    homeTeam.Link = Url.Content("~/") + "team/" + result.HomeTeam.TeamId;
+
+                    game.HomeTeam = homeTeam;
+                }
+
+                if (result.AwayTeam != null)
+                {
+                    Team awayTeam = new Team();
+                    awayTeam.TeamId = result.AwayTeam.TeamId;
+                    awayTeam.ShortName = result.AwayTeam.ShortName;
+                    awayTeam.Link = Url.Content("~/") + "team/" + result.AwayTeam.TeamId;
+
+                    game.AwayTeam = awayTeam;
+                }
+
+                game.Link = Url.Content("~/") + "game/" + result.GameId;
                 games.Add(game);
             }
 
-            return Ok(games);
+            GameList gameList = new GameList();
+            gameList.Games = games;
+
+            return Ok(gameList);
         }
     }
 }

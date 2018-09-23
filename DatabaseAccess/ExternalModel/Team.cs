@@ -37,7 +37,6 @@
             _miniName = miniName;
         }
 
-
         public string TeamId
         {
             get { return _teamId; }
@@ -86,6 +85,22 @@
         public string MiniName
         {
             get { return _miniName; }
+        }
+
+        internal static Team Convert(InternalModel.Team team)
+        {
+            return new Team(
+                team.TeamId.ToString(),
+                team.Club == null ? null : Club.Convert(team.Club),
+                team.ShortName,
+                team.LongName,
+                team.TeamRef,
+                team.IsDirty.ToString(),
+                team.Url,
+                team.SponsorsName,
+                team.SponsorsUrl,
+                team.MiniName
+                );
         }
     }
 }

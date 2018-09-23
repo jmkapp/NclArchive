@@ -20,7 +20,6 @@ namespace DatabaseAccess.Repositories
                     ExternalModel.AllClubsResult newClub = new ExternalModel.AllClubsResult(databaseClub.ClubId.ToString(), databaseClub.ShortName, databaseClub.LongName);
                     clubs.Add(newClub);
                 }
-
             }
 
             return new ReadOnlyCollection<ExternalModel.AllClubsResult>(clubs);

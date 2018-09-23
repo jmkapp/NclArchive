@@ -12,7 +12,7 @@ namespace NclArchiveApi.Models
         [JsonProperty(PropertyName = "longName")]
         public string LongName { get; set; }
         [JsonProperty(PropertyName = "nclTeam")]
-        public bool NclTeam { get; set; }
+        public bool? NclTeam { get; set; }
         [JsonProperty(PropertyName = "teamRef")]
         public string TeamRef { get; set; }
         [JsonProperty(PropertyName = "isDirty")]
@@ -33,5 +33,22 @@ namespace NclArchiveApi.Models
         public Club Club { get; set; }
         [JsonProperty(PropertyName = "seasons")]
         public IEnumerable<Season> Seasons { get; set; }
+
+        internal static Team Convert(DatabaseAccess.ExternalModel.Team team)
+        {
+            Team newTeam = new Team();
+            newTeam.TeamId = team.TeamId;
+            newTeam.ShortName = team.ShortName;
+            newTeam.LongName = team.LongName;
+            newTeam.TeamRef = team.TeamRef;
+            newTeam.IsDirty = team.IsDirty;
+            newTeam.Url = team.Url;
+            newTeam.SponsorName = team.SponsorsName;
+            newTeam.SponsorUrl = team.SponsorsUrl;
+            newTeam.MiniName = team.MiniName;
+            newTeam.Club = team.Club == null ? null : Club.Convert(team.Club);
+
+            return newTeam;
+        }
     }
 }

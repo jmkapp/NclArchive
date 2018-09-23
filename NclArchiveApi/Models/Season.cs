@@ -16,8 +16,21 @@ namespace NclArchiveApi.Models
         [JsonProperty(PropertyName = "endDate")]
         public DateTime? EndDate { get; set; }
         [JsonProperty(PropertyName = "winterSeason")]
-        public bool WinterSeason { get; set; }
+        public bool? WinterSeason { get; set; }
         [JsonProperty(PropertyName = "link")]
         public string Link { get; set; }
+
+        internal static Season Convert(DatabaseAccess.ExternalModel.Season season)
+        {
+            Season newSeason = new Season();
+            newSeason.SeasonId = season.SeasonId;
+            newSeason.ShortName = season.ShortName;
+            newSeason.LongName = season.LongName;
+            newSeason.StartDate = season.StartDate;
+            newSeason.EndDate = season.EndDate;
+            newSeason.WinterSeason = season.WinterSeason;
+
+            return newSeason;
+        }
     }
 }

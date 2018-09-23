@@ -107,6 +107,7 @@
     <Compile Include="Models\Club.cs" />
     <Compile Include="Models\ClubList.cs" />
     <Compile Include="Models\Game.cs" />
+    <Compile Include="Models\GameList.cs" />
     <Compile Include="Models\Resource.cs" />
     <Compile Include="Models\ResourceList.cs" />
     <Compile Include="Models\Season.cs" />

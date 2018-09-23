@@ -56,5 +56,16 @@ namespace DatabaseAccess.ExternalModel
         {
             get { return _winterSeason; }
         }
+
+        internal static Season Convert(InternalModel.Season season)
+        {
+            return new Season(
+                season.SeasonId.ToString(),
+                season.ShortName,
+                season.LongName,
+                season.StartDate,
+                season.EndDate,
+                season.WinterSeason);
+        }
     }
 }

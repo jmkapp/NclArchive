@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using DatabaseAccess.ExternalModel;
 using Newtonsoft.Json;
 
@@ -44,5 +45,28 @@ namespace NclArchiveApi.Models
         public string TeamsLink { get; set; }
         [JsonProperty(PropertyName = "teams")]
         public IEnumerable<Team> Teams { get; set; }
+
+        internal static Club Convert(DatabaseAccess.ExternalModel.Club club)
+        {
+            Club newClub = new Club();
+            newClub.ClubId = club.ClubId;
+            newClub.ShortName = club.ShortName;
+            newClub.LongName = club.LongName;
+            newClub.Description = club.Description;
+            newClub.VenueId = club.VenueId;
+            newClub.Url = club.Url;
+            newClub.ImageFile = club.ImageFile;
+            newClub.ContactName = club.ContactName;
+            newClub.AddressLine1 = club.AddressLine1;
+            newClub.AddressLine2 = club.AddressLine2;
+            newClub.AddressLine3 = club.AddressLine3;
+            newClub.Postcode = club.Postcode;
+            newClub.Telephone = club.Telephone;
+            newClub.Fax = club.Fax;
+            newClub.CustomerId = club.CustomerId;
+            newClub.AssociationId = club.AssociationId;
+
+            return newClub;
+        }
     }
 }
