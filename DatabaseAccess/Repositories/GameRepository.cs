@@ -37,7 +37,6 @@ namespace DatabaseAccess.Repositories
                 foreach (InternalModel.TeamGameResult result in databaseGames)
                 {
                     ExternalModel.TeamGameResult game = new TeamGameResult(
-                        result.GameType.ToString(),
                         result.ShortName,
                         result.GameId.ToString(),
                         result.HomeTeamId.HasValue ? result.HomeTeamId.ToString() : null,
@@ -50,29 +49,20 @@ namespace DatabaseAccess.Repositories
                         result.AwayTeamScore.ToString(),
                         result.GameDate.HasValue ? result.GameDate.ToString() : null,
                         result.VenueId.ToString(),
-                        result.RefereeId.HasValue ? result.RefereeId.ToString() : null,
-                        result.Line1Id.HasValue ? result.Line1Id.ToString() : null,
-                        result.Line2Id.HasValue ? result.Line2Id.ToString() : null,
                         result.DivisionId.ToString(),
-                        result.CompCupPoId.ToString(),
-                        result.GameTypeId.HasValue ? result.GameTypeId.ToString() : null,
-                        result.Status.ToString(),
+                        result.DivisionName,
                         result.DDate,
                         result.TTime.ToString(),
                         result.GameStatus,
                         result.Comp,
-                        result.CompUrl,
+                        result.CompCupPoId.ToString(),
+                        result.GameTypeId.HasValue ? result.GameTypeId.ToString() : null,
                         result.SeasonId,
-                        Season.Convert(season),
-                        result.DivisionName,
                         result.SeasonName,
-                        result.HomeNclTeam,
-                        result.AwayNclTeam,
+                        Season.Convert(season),
                         result.HomeTeamName,
-                        result.AwayTeamName,
-                        result.LongHomeTeam,
-                        result.LongAwayTeam);
-
+                        result.AwayTeamName);
+             
                     games.Add(game);
                 }
             }

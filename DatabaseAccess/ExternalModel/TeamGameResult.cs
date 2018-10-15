@@ -5,7 +5,6 @@ namespace DatabaseAccess.ExternalModel
     public class TeamGameResult
     {
         private readonly string _gameId;
-        private readonly string _gameType;
         private readonly string _shortName;
         private readonly string _homeTeamId;
         private readonly Team _homeTeam;
@@ -17,31 +16,21 @@ namespace DatabaseAccess.ExternalModel
         private readonly string _awayTeamScore;
         private readonly string _gameDate;
         private readonly string _venueId;
-        private readonly string _refereeId;
-        private readonly string _line1Id;
-        private readonly string _line2Id;
         private readonly string _divisionId;
-        private readonly string _compCupPoId;
-        private readonly string _gameTypeId;
-        private readonly string _status;
+        private readonly string _divisionName;
         private readonly string _dDate;
         private readonly string _tTime;
         private readonly string _gameStatus;
         private readonly string _comp;
-        private readonly string _compUrl;
+        private readonly string _compCupPoId;
+        private readonly string _gameTypeId;
         private readonly int _seasonId;
-        private readonly Season _season;
-        private readonly string _divisionName;
         private readonly string _seasonName;
-        private readonly string _homeNclTeam;
-        private readonly string _awayNclTeam;
+        private readonly Season _season;
         private readonly string _homeTeamName;
         private readonly string _awayTeamName;
-        private readonly string _longHomeTeam;
-        private readonly string _longAwayTeam;
 
         public TeamGameResult(
-            string gameType,
             string shortName,
             string gameId,
             string homeTeamId,
@@ -54,31 +43,21 @@ namespace DatabaseAccess.ExternalModel
             string awayTeamScore,
             string gameDate,
             string venueId,
-            string refereeId,
-            string line1Id,
-            string line2Id,
             string divisionId,
-            string compCupPoId,
-            string gameTypeId,
-            string status,
+            string divisionName,
             string dDate,
             string tTime,
             string gameStatus,
             string comp,
-            string compUrl,
+            string compCupPoId,
+            string gameTypeId,
             int seasonId,
-            Season season,
-            string divisionName,
             string seasonName,
-            string homeNclTeam,
-            string awayNclTeam,
+            Season season,
             string homeTeamName,
-            string awayTeamName,
-            string longHomeTeam,
-            string longAwayTeam
+            string awayTeamName
         )
         {
-            _gameType = gameType;
             _shortName = shortName;
             _gameId = gameId;
             _homeTeamId = homeTeamId;
@@ -91,38 +70,24 @@ namespace DatabaseAccess.ExternalModel
             _awayTeamScore = awayTeamScore;
             _gameDate = gameDate;
             _venueId = venueId;
-            _refereeId = refereeId;
-            _line1Id = line1Id;
-            _line2Id = line2Id;
             _divisionId = divisionId;
-            _compCupPoId = compCupPoId;
-            _gameTypeId = gameTypeId;
-            _status = status;
+            _divisionName = divisionName;
             _dDate = dDate;
             _tTime = tTime;
             _gameStatus = gameStatus;
             _comp = comp;
-            _compUrl = compUrl;
+            _compCupPoId = compCupPoId;
+            _gameTypeId = gameTypeId;
             _seasonId = seasonId;
-            _divisionName = divisionName;
             _seasonName = seasonName;
             _season = season;
-            _homeNclTeam = homeNclTeam;
-            _awayNclTeam = awayNclTeam;
             _homeTeamName = homeTeamName;
             _awayTeamName = awayTeamName;
-            _longHomeTeam = longHomeTeam;
-            _longAwayTeam = longAwayTeam;
         }
 
         public string GameId
         {
             get { return _gameId; }
-        }
-
-        public string GameType
-        {
-            get { return _gameType; }
         }
 
         public string ShortName
@@ -180,21 +145,6 @@ namespace DatabaseAccess.ExternalModel
             get { return _venueId; }
         }
 
-        public string RefereeId
-        {
-            get { return _refereeId; }
-        }
-
-        public string Line1Id
-        {
-            get { return _line1Id; }
-        }
-
-        public string Line2Id
-        {
-            get { return _line2Id; }
-        }
-
         public string DivisionId
         {
             get { return _divisionId; }
@@ -208,11 +158,6 @@ namespace DatabaseAccess.ExternalModel
         public string GameTypeId
         {
             get { return _gameTypeId; }
-        }
-
-        public string Status
-        {
-            get { return _status; }
         }
 
         public string DDate
@@ -235,11 +180,6 @@ namespace DatabaseAccess.ExternalModel
             get { return _comp; }
         }
 
-        public string CompUrl
-        {
-            get { return _compUrl; }
-        }
-
         public int SeasonId
         {
             get { return _seasonId; }
@@ -260,16 +200,6 @@ namespace DatabaseAccess.ExternalModel
             get { return _seasonName; }
         }
 
-        public string HomeNclTeam
-        {
-            get { return _homeNclTeam; }
-        }
-
-        public string AwayNclTeam
-        {
-            get { return _awayNclTeam; }
-        }
-
         public string HomeTeamName
         {
             get { return _homeTeamName; }
@@ -278,16 +208,6 @@ namespace DatabaseAccess.ExternalModel
         public string AwayTeamName
         {
             get { return _awayTeamName; }
-        }
-
-        public string LongHomeTeam
-        {
-            get { return _longHomeTeam; }
-        }
-
-        public string LongAwayTeam
-        {
-            get { return _longAwayTeam; }
         }
     }
 }
