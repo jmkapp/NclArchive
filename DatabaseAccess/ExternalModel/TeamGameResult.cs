@@ -16,8 +16,7 @@ namespace DatabaseAccess.ExternalModel
         private readonly string _awayTeamScore;
         private readonly string _gameDate;
         private readonly string _venueId;
-        private readonly string _divisionId;
-        private readonly string _divisionName;
+        private readonly Division _division;
         private readonly string _dDate;
         private readonly string _tTime;
         private readonly string _gameStatus;
@@ -43,8 +42,7 @@ namespace DatabaseAccess.ExternalModel
             string awayTeamScore,
             string gameDate,
             string venueId,
-            string divisionId,
-            string divisionName,
+            Division division,
             string dDate,
             string tTime,
             string gameStatus,
@@ -70,8 +68,7 @@ namespace DatabaseAccess.ExternalModel
             _awayTeamScore = awayTeamScore;
             _gameDate = gameDate;
             _venueId = venueId;
-            _divisionId = divisionId;
-            _divisionName = divisionName;
+            _division = division;
             _dDate = dDate;
             _tTime = tTime;
             _gameStatus = gameStatus;
@@ -145,9 +142,9 @@ namespace DatabaseAccess.ExternalModel
             get { return _venueId; }
         }
 
-        public string DivisionId
+        public Division Division
         {
-            get { return _divisionId; }
+            get { return _division; }
         }
 
         public string CompCupPoId
@@ -188,11 +185,6 @@ namespace DatabaseAccess.ExternalModel
         public Season Season
         {
             get { return _season; }
-        }
-
-        public string DivisionName
-        {
-            get { return _divisionName; }
         }
 
         public string SeasonName

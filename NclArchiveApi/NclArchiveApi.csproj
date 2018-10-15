@@ -106,6 +106,7 @@
     </Compile>
     <Compile Include="Models\Club.cs" />
     <Compile Include="Models\ClubList.cs" />
+    <Compile Include="Models\Division.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\GameList.cs" />
     <Compile Include="Models\Resource.cs" />

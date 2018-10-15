@@ -24,10 +24,8 @@ namespace NclArchiveApi.Models
         public string GameDate { get; set; }
         [JsonProperty(PropertyName = "venueId")]
         public string VenueId { get; set; }
-        [JsonProperty(PropertyName = "divisionId")]
-        public string DivisionId { get; set; }
-        [JsonProperty(PropertyName = "divisionName")]
-        public string DivisionName { get; set; }
+        [JsonProperty(PropertyName = "division")]
+        public Division Division { get; set; }
         [JsonProperty(PropertyName = "dDate")]
         public string Ddate { get; set; }
         [JsonProperty(PropertyName = "tTime")]
@@ -56,8 +54,6 @@ namespace NclArchiveApi.Models
             game.AwayTeamScore = result.AwayTeamScore;
             game.GameDate = result.GameDate;
             game.VenueId = result.VenueId;
-            game.DivisionId = result.DivisionId;
-            game.DivisionName = result.DivisionName;
             game.CompCupPoId = result.CompCupPoId;
             game.GameTypeId = result.GameTypeId;
             game.Ddate = result.DDate;

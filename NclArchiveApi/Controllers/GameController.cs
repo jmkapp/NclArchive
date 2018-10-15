@@ -13,6 +13,7 @@ using System.Web.Http.Cors;
 using DatabaseAccess.ExternalModel;
 using DatabaseAccess.Repositories;
 using NclArchiveApi.Models;
+using Division = NclArchiveApi.Models.Division;
 using Season = NclArchiveApi.Models.Season;
 using Team = NclArchiveApi.Models.Team;
 
@@ -79,6 +80,16 @@ namespace NclArchiveApi.Controllers
                     awayTeam.Link = Url.Content("~/") + "team/" + result.AwayTeam.TeamId;
 
                     game.AwayTeam = awayTeam;
+                }
+
+                if (result.Division != null)
+                {
+                    Division division = new Division();
+                    division.DivisionId = result.Division.DivisionId;
+                    division.ShortName = result.Division.ShortName;
+                    division.Link = Url.Content("~/") + "division/" + result.Division.DivisionId;
+
+                    game.Division = division;
                 }
 
                 game.Link = Url.Content("~/") + "game/" + result.GameId;

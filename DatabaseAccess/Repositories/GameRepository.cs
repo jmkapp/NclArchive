@@ -33,9 +33,17 @@ namespace DatabaseAccess.Repositories
                 List<InternalModel.Team> teams = await context.Teams.Where(t => teamIds.Contains(t.TeamId)).ToListAsync();
 
                 InternalModel.Season season = await context.Seasons.FirstOrDefaultAsync(s => s.SeasonId == seasonId);
+                InternalModel.Division division = null;
+                ExternalModel.Division newDivision = null;
 
                 foreach (StoredProcedureResults.TeamGameResult result in databaseGames)
                 {
+                    if (division == null)
+                    {
+                        division = await context.Divisions.FirstOrDefaultAsync(d => d.DivisionId == result.DivisionId);
+                        newDivision = ExternalModel.Division.Convert(division);
+                    }
+
                     ExternalModel.TeamGameResult game = new TeamGameResult(
                         result.ShortName,
                         result.GameId.ToString(),
@@ -49,8 +57,7 @@ namespace DatabaseAccess.Repositories
                         result.AwayTeamScore.ToString(),
                         result.GameDate.HasValue ? result.GameDate.ToString() : null,
                         result.VenueId.ToString(),
-                        result.DivisionId.ToString(),
-                        result.DivisionName,
+                        newDivision,
                         result.DDate,
                         result.TTime.ToString(),
                         result.GameStatus,
