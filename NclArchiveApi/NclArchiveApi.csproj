@@ -113,6 +113,7 @@
     <Compile Include="Models\ResourceList.cs" />
     <Compile Include="Models\Season.cs" />
     <Compile Include="Models\Team.cs" />
+    <Compile Include="Models\Venue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

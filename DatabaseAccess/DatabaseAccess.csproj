@@ -56,6 +56,7 @@
     <Compile Include="ExternalModel\Team.cs" />
     <Compile Include="ExternalModel\TeamGameResult.cs" />
     <Compile Include="ExternalModel\TeamsInClubResult.cs" />
+    <Compile Include="ExternalModel\Venue.cs" />
     <Compile Include="InternalModel\Club.cs" />
     <Compile Include="InternalModel\Division.cs" />
     <Compile Include="InternalModel\Game.cs" />

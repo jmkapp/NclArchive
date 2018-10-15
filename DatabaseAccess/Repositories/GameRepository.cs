@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using DatabaseAccess.ExternalModel;
+using Division = DatabaseAccess.InternalModel.Division;
+using Venue = DatabaseAccess.InternalModel.Venue;
 
 namespace DatabaseAccess.Repositories
 {
@@ -33,18 +33,20 @@ namespace DatabaseAccess.Repositories
                 List<InternalModel.Team> teams = await context.Teams.Where(t => teamIds.Contains(t.TeamId)).ToListAsync();
 
                 InternalModel.Season season = await context.Seasons.FirstOrDefaultAsync(s => s.SeasonId == seasonId);
-                InternalModel.Division division = null;
-                ExternalModel.Division newDivision = null;
+
+                List<int> divisionIds = databaseGames.Select(d => d.DivisionId).Distinct().ToList();
+                List<Division> divisions =
+                    await context.Divisions.Where(d => divisionIds.Contains(d.DivisionId)).ToListAsync();
+
+                List<int> venueIds = databaseGames.Select(v => v.VenueId).Distinct().ToList();
+                List<Venue> venues = await context.Venues.Where(v => venueIds.Contains(v.VenueId)).ToListAsync();
 
                 foreach (StoredProcedureResults.TeamGameResult result in databaseGames)
                 {
-                    if (division == null)
-                    {
-                        division = await context.Divisions.FirstOrDefaultAsync(d => d.DivisionId == result.DivisionId);
-                        newDivision = ExternalModel.Division.Convert(division);
-                    }
+                    Division division = divisions.FirstOrDefault(d => d.DivisionId == result.DivisionId);
+                    Venue venue = venues.FirstOrDefault(v => v.VenueId == result.VenueId);
 
-                    ExternalModel.TeamGameResult game = new TeamGameResult(
+                    TeamGameResult game = new TeamGameResult(
                         result.ShortName,
                         result.GameId.ToString(),
                         result.HomeTeamId.HasValue ? result.HomeTeamId.ToString() : null,
@@ -56,8 +58,8 @@ namespace DatabaseAccess.Repositories
                         result.HomeTeamScore.ToString(),
                         result.AwayTeamScore.ToString(),
                         result.GameDate.HasValue ? result.GameDate.ToString() : null,
-                        result.VenueId.ToString(),
-                        newDivision,
+                        ExternalModel.Venue.Convert(venue),
+                        ExternalModel.Division.Convert(division), 
                         result.DDate,
                         result.TTime.ToString(),
                         result.GameStatus,

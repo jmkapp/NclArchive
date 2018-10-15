@@ -15,7 +15,7 @@ namespace DatabaseAccess.ExternalModel
         private readonly string _homeTeamScore;
         private readonly string _awayTeamScore;
         private readonly string _gameDate;
-        private readonly string _venueId;
+        private readonly Venue _venue;
         private readonly Division _division;
         private readonly string _dDate;
         private readonly string _tTime;
@@ -41,7 +41,7 @@ namespace DatabaseAccess.ExternalModel
             string homeTeamScore,
             string awayTeamScore,
             string gameDate,
-            string venueId,
+            Venue venue,
             Division division,
             string dDate,
             string tTime,
@@ -67,7 +67,7 @@ namespace DatabaseAccess.ExternalModel
             _homeTeamScore = homeTeamScore;
             _awayTeamScore = awayTeamScore;
             _gameDate = gameDate;
-            _venueId = venueId;
+            _venue = venue;
             _division = division;
             _dDate = dDate;
             _tTime = tTime;
@@ -137,9 +137,9 @@ namespace DatabaseAccess.ExternalModel
             get { return _gameDate; }
         }
 
-        public string VenueId
+        public Venue Venue
         {
-            get { return _venueId; }
+            get { return _venue; }
         }
 
         public Division Division

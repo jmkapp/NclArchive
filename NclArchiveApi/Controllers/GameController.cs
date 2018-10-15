@@ -16,6 +16,7 @@ using NclArchiveApi.Models;
 using Division = NclArchiveApi.Models.Division;
 using Season = NclArchiveApi.Models.Season;
 using Team = NclArchiveApi.Models.Team;
+using Venue = NclArchiveApi.Models.Venue;
 
 namespace NclArchiveApi.Controllers
 {
@@ -90,6 +91,16 @@ namespace NclArchiveApi.Controllers
                     division.Link = Url.Content("~/") + "division/" + result.Division.DivisionId;
 
                     game.Division = division;
+                }
+
+                if (result.Venue != null)
+                {
+                    Venue venue = new Venue();
+                    venue.VenueId = result.Venue.VenueId.ToString();
+                    venue.ShortName = result.Venue.ShortName;
+                    venue.Link = Url.Content("~/") + "venue/" + result.Venue.VenueId;
+
+                    game.Venue = venue;
                 }
 
                 game.Link = Url.Content("~/") + "game/" + result.GameId;

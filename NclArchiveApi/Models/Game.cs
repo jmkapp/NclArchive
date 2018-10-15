@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using DatabaseAccess.ExternalModel;
+using Newtonsoft.Json;
 
 namespace NclArchiveApi.Models
 {
@@ -22,8 +23,8 @@ namespace NclArchiveApi.Models
         public string AwayTeamScore { get; set; }
         [JsonProperty(PropertyName = "gameDate")]
         public string GameDate { get; set; }
-        [JsonProperty(PropertyName = "venueId")]
-        public string VenueId { get; set; }
+        [JsonProperty(PropertyName = "venue")]
+        public Venue Venue { get; set; }
         [JsonProperty(PropertyName = "division")]
         public Division Division { get; set; }
         [JsonProperty(PropertyName = "dDate")]
@@ -53,7 +54,6 @@ namespace NclArchiveApi.Models
             game.HomeTeamScore = result.HomeTeamScore;
             game.AwayTeamScore = result.AwayTeamScore;
             game.GameDate = result.GameDate;
-            game.VenueId = result.VenueId;
             game.CompCupPoId = result.CompCupPoId;
             game.GameTypeId = result.GameTypeId;
             game.Ddate = result.DDate;
