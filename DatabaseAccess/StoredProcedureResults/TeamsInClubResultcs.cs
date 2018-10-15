@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DatabaseAccess.InternalModel
+namespace DatabaseAccess.StoredProcedureResults
 {
     internal class TeamsInClubResult
     {

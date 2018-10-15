@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Threading.Tasks;
+using DatabaseAccess.StoredProcedureResults;
 
 namespace DatabaseAccess.Repositories
 {
@@ -13,9 +14,9 @@ namespace DatabaseAccess.Repositories
 
             using (var context = new DatabaseContext())
             {
-                var databaseClubs = await context.Database.SqlQuery<InternalModel.GetClubsResult>("dbo.api_GetAllClubs").ToListAsync();
+                var databaseClubs = await context.Database.SqlQuery<GetClubsResult>("dbo.api_GetAllClubs").ToListAsync();
 
-                foreach (InternalModel.GetClubsResult databaseClub in databaseClubs)
+                foreach (GetClubsResult databaseClub in databaseClubs)
                 {
                     ExternalModel.AllClubsResult newClub = new ExternalModel.AllClubsResult(databaseClub.ClubId.ToString(), databaseClub.ShortName, databaseClub.LongName);
                     clubs.Add(newClub);

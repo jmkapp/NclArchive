@@ -4,6 +4,8 @@ using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using DatabaseAccess.ExternalModel;
+using SeasonsForTeamResult = DatabaseAccess.StoredProcedureResults.SeasonsForTeamResult;
+using TeamsInClubResult = DatabaseAccess.StoredProcedureResults.TeamsInClubResult;
 
 namespace DatabaseAccess.Repositories
 {
@@ -47,11 +49,11 @@ namespace DatabaseAccess.Repositories
 
             using (var context = new DatabaseContext())
             {
-                var databaseTeams = await context.Database.SqlQuery<InternalModel.TeamsInClubResult>(
+                var databaseTeams = await context.Database.SqlQuery<TeamsInClubResult>(
                     "dbo.api_GetTeamsinClubID @clubId",
                     new SqlParameter("clubId", int.Parse(clubId))).ToListAsync();
 
-                foreach (InternalModel.TeamsInClubResult team in databaseTeams)
+                foreach (TeamsInClubResult team in databaseTeams)
                 {
                     ExternalModel.TeamsInClubResult newTeam = new ExternalModel.TeamsInClubResult(
                         team.TeamId.ToString(),
@@ -77,12 +79,12 @@ namespace DatabaseAccess.Repositories
 
             using (var context = new DatabaseContext())
             {
-                var databaseSeasons = await context.Database.SqlQuery<InternalModel.SeasonsForTeamResult>(
+                var databaseSeasons = await context.Database.SqlQuery<SeasonsForTeamResult>(
                     "dbo.api_GetNCLSeasonsForTeamID @teamId",
                     new SqlParameter("teamId", teamId)).ToListAsync();
 
 
-                foreach (InternalModel.SeasonsForTeamResult season in databaseSeasons)
+                foreach (SeasonsForTeamResult season in databaseSeasons)
                 {
                     ExternalModel.SeasonsForTeamResult newSeason = new ExternalModel.SeasonsForTeamResult(
                         season.SeasonId.ToString(),
@@ -92,7 +94,7 @@ namespace DatabaseAccess.Repositories
                 }
             }
 
-            return new ReadOnlyCollection<SeasonsForTeamResult>(seasons);
+            return new ReadOnlyCollection<ExternalModel.SeasonsForTeamResult>(seasons);
         }
     }
 }

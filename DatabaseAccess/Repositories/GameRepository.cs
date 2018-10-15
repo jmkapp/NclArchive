@@ -24,7 +24,7 @@ namespace DatabaseAccess.Repositories
 
             using (var context = new DatabaseContext())
             {
-                var databaseGames = await context.Database.SqlQuery<InternalModel.TeamGameResult>(
+                var databaseGames = await context.Database.SqlQuery<StoredProcedureResults.TeamGameResult>(
                     "dbo.api_GetTeamGames_asc @teamId, @seasonId",
                     new SqlParameter("teamId", teamId),
                     new SqlParameter("seasonId", seasonId)).ToListAsync();
@@ -34,7 +34,7 @@ namespace DatabaseAccess.Repositories
 
                 InternalModel.Season season = await context.Seasons.FirstOrDefaultAsync(s => s.SeasonId == seasonId);
 
-                foreach (InternalModel.TeamGameResult result in databaseGames)
+                foreach (StoredProcedureResults.TeamGameResult result in databaseGames)
                 {
                     ExternalModel.TeamGameResult game = new TeamGameResult(
                         result.ShortName,
@@ -70,11 +70,11 @@ namespace DatabaseAccess.Repositories
             return new ReadOnlyCollection<TeamGameResult>(games);
         }
 
-        private List<int> GetGameIds(List<InternalModel.TeamGameResult> results)
+        private List<int> GetGameIds(List<StoredProcedureResults.TeamGameResult> results)
         {
             List<int> ids = new List<int>();
 
-            foreach (InternalModel.TeamGameResult result in results)
+            foreach (StoredProcedureResults.TeamGameResult result in results)
             {
                 if(result.HomeTeamId.HasValue)
                     ids.Add(result.HomeTeamId.Value);

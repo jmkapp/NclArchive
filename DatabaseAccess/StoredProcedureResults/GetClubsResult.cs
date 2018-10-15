@@ -1,4 +1,4 @@
-﻿namespace DatabaseAccess.InternalModel
+﻿namespace DatabaseAccess.StoredProcedureResults
 {
     internal class GetClubsResult
     {

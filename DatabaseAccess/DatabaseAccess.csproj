@@ -58,12 +58,12 @@
     <Compile Include="InternalModel\Club.cs" />
     <Compile Include="InternalModel\Division.cs" />
     <Compile Include="InternalModel\Game.cs" />
-    <Compile Include="InternalModel\GetClubsResult.cs" />
+    <Compile Include="StoredProcedureResults\GetClubsResult.cs" />
     <Compile Include="InternalModel\Season.cs" />
-    <Compile Include="InternalModel\SeasonsForTeamResult.cs" />
+    <Compile Include="StoredProcedureResults\SeasonsForTeamResult.cs" />
     <Compile Include="InternalModel\Team.cs" />
-    <Compile Include="InternalModel\TeamGameResult.cs" />
-    <Compile Include="InternalModel\TeamsInClubResultcs.cs" />
+    <Compile Include="StoredProcedureResults\TeamGameResult.cs" />
+    <Compile Include="StoredProcedureResults\TeamsInClubResultcs.cs" />
     <Compile Include="InternalModel\Venue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ClubRepository.cs" />

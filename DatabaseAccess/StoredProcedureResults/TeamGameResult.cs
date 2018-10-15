@@ -1,7 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using DatabaseAccess.InternalModel;
 
-namespace DatabaseAccess.InternalModel
+namespace DatabaseAccess.StoredProcedureResults
 {
     internal class TeamGameResult
     {
