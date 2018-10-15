@@ -21,5 +21,6 @@ namespace DatabaseAccess
         public DbSet<InternalModel.Team> Teams { get; set; }
         public DbSet<InternalModel.Game> Games { get; set; }
         public DbSet<InternalModel.Season> Seasons { get; set; }
+        public DbSet<InternalModel.Venue> Venues { get; set; }
     }
 }
