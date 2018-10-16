@@ -10,5 +10,14 @@ namespace NclArchiveApi.Models
         public string ShortName { get; set; }
         [JsonProperty(PropertyName = "link")]
         public string Link { get; set; }
+
+        internal static Division Convert(DatabaseAccess.ExternalModel.Division division)
+        {
+            Division newDivision = new Division();
+            newDivision.DivisionId = division.DivisionId;
+            newDivision.ShortName = division.ShortName;
+
+            return newDivision;
+        }
     }
 }

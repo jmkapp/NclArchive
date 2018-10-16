@@ -60,6 +60,8 @@
     <Compile Include="InternalModel\Club.cs" />
     <Compile Include="InternalModel\Division.cs" />
     <Compile Include="InternalModel\Game.cs" />
+    <Compile Include="Repositories\DivisionRepository.cs" />
+    <Compile Include="Repositories\IDivisionRepository.cs" />
     <Compile Include="Repositories\ISeasonRepository.cs" />
     <Compile Include="Repositories\SeasonRepository.cs" />
     <Compile Include="StoredProcedureResults\GetClubsResult.cs" />
