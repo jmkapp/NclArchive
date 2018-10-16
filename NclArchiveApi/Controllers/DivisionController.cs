@@ -41,6 +41,8 @@ namespace NclArchiveApi.Controllers
 
             Models.Division division = Models.Division.Convert(databaseDivision);
 
+            division.Link = Url.Content("~/") + "division/" + databaseDivision.DivisionId;
+
             return Ok(division);
         }
     }

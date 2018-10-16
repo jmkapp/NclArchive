@@ -41,6 +41,8 @@ namespace NclArchiveApi.Controllers
 
             Models.Season season = Models.Season.Convert(databaseSeason);
 
+            season.Link = Url.Content("~/") + "season/" + databaseSeason.SeasonId;
+
             return Ok(season);
         }
     }
