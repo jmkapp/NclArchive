@@ -29,11 +29,7 @@ namespace NclArchiveApi.Controllers
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         public async Task<IHttpActionResult> Get(string teamId)
         {
-            AuthenticationHeaderValue authenticationHeaderValue = Request.Headers.Authorization;
-            var userNamePasswordString = authenticationHeaderValue == null ? ":" :
-                Encoding.UTF8.GetString(Convert.FromBase64String(authenticationHeaderValue.Parameter));
-
-            Authorizer authorizer = new Authorizer(userNamePasswordString);
+            Authorizer authorizer = new Authorizer(Request.Headers.Authorization);
 
             if (!authorizer.Authorized)
                 return Content(HttpStatusCode.Unauthorized, authorizer.RejectionMessage);
@@ -74,11 +70,7 @@ namespace NclArchiveApi.Controllers
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         public async Task<IHttpActionResult> GetSeasons(string teamId)
         {
-            AuthenticationHeaderValue authenticationHeaderValue = Request.Headers.Authorization;
-            var userNamePasswordString = authenticationHeaderValue == null ? ":" :
-                Encoding.UTF8.GetString(Convert.FromBase64String(authenticationHeaderValue.Parameter));
-
-            Authorizer authorizer = new Authorizer(userNamePasswordString);
+            Authorizer authorizer = new Authorizer(Request.Headers.Authorization);
 
             if (!authorizer.Authorized)
                 return Content(HttpStatusCode.Unauthorized, authorizer.RejectionMessage);

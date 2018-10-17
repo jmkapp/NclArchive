@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Web.Configuration;
 
 namespace NclArchiveApi.Controllers
@@ -10,8 +12,11 @@ namespace NclArchiveApi.Controllers
         private readonly string _message = "This API is password protected.  " + 
                                            "Put the password in the Basic Auth of the HTTP request (username can be any value).";
 
-        internal Authorizer(string userNamePasswordString)
+        internal Authorizer(AuthenticationHeaderValue authenticationHeaderValue)
         {
+            var userNamePasswordString = authenticationHeaderValue == null ? ":" :
+                Encoding.UTF8.GetString(Convert.FromBase64String(authenticationHeaderValue.Parameter));
+
             string username = userNamePasswordString.Split(':')[0];
             string password = userNamePasswordString.Split(':')[1];
 

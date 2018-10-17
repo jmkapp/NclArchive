@@ -1,7 +1,4 @@
-﻿using System;
-using System.Net;
-using System.Net.Http.Headers;
-using System.Text;
+﻿using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
@@ -23,11 +20,7 @@ namespace NclArchiveApi.Controllers
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         public async Task<IHttpActionResult> Get(string divisionReference)
         {
-            AuthenticationHeaderValue authenticationHeaderValue = Request.Headers.Authorization;
-            var userNamePasswordString = authenticationHeaderValue == null ? ":" :
-                Encoding.UTF8.GetString(Convert.FromBase64String(authenticationHeaderValue.Parameter));
-
-            Authorizer authorizer = new Authorizer(userNamePasswordString);
+            Authorizer authorizer = new Authorizer(Request.Headers.Authorization);
 
             if (!authorizer.Authorized)
                 return Content(HttpStatusCode.Unauthorized, authorizer.RejectionMessage);
