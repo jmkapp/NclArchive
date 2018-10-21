@@ -64,6 +64,7 @@
     <Compile Include="Repositories\DivisionRepository.cs" />
     <Compile Include="Repositories\Interfaces\IDivisionRepository.cs" />
     <Compile Include="Repositories\Interfaces\ISeasonRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IVenueRepository.cs" />
     <Compile Include="Repositories\SeasonRepository.cs" />
     <Compile Include="InternalModel\StoredProcedureResults\GetClubsResult.cs" />
     <Compile Include="InternalModel\Season.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Repositories\Interfaces\IGameRepository.cs" />
     <Compile Include="Repositories\Interfaces\ITeamRepository.cs" />
     <Compile Include="Repositories\TeamRepository.cs" />
+    <Compile Include="Repositories\VenueRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

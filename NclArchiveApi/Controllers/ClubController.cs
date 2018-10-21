@@ -62,12 +62,17 @@ namespace NclArchiveApi.Controllers
         [Route("club/{clubId}")]
         [HttpGet]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        public async Task<IHttpActionResult> Get(string clubId)
+        public async Task<IHttpActionResult> Get(string clubReference)
         {
             Authorizer authorizer = new Authorizer(Request.Headers.Authorization);
 
             if (!authorizer.Authorized)
                 return Content(HttpStatusCode.Unauthorized, authorizer.RejectionMessage);
+
+            bool converts = int.TryParse(clubReference, out int clubId);
+
+            if (converts == false)
+                return BadRequest();
 
             DatabaseAccess.ExternalModel.Club databaseClub = await _clubRepository.GetClubAsync(clubId);
 
@@ -96,12 +101,17 @@ namespace NclArchiveApi.Controllers
         [Route("club/{clubId}/teams")]
         [HttpGet]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        public async Task<IHttpActionResult> GetTeamsInClub(string clubId)
+        public async Task<IHttpActionResult> GetTeamsInClub(string clubReference)
         {
             Authorizer authorizer = new Authorizer(Request.Headers.Authorization);
 
             if (!authorizer.Authorized)
                 return Content(HttpStatusCode.Unauthorized, authorizer.RejectionMessage);
+
+            bool converts = int.TryParse(clubReference, out int clubId);
+
+            if (converts == false)
+                return BadRequest();
 
             DatabaseAccess.ExternalModel.Club databaseClub = await _clubRepository.GetClubAsync(clubId);
 

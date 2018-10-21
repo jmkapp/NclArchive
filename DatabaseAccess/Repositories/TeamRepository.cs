@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
-using DatabaseAccess.ExternalModel;
 using DatabaseAccess.Repositories.Interfaces;
 using SeasonsForTeamResult = DatabaseAccess.InternalModel.StoredProcedureResults.SeasonsForTeamResult;
 using TeamsInClubResult = DatabaseAccess.InternalModel.StoredProcedureResults.TeamsInClubResult;
@@ -44,7 +43,7 @@ namespace DatabaseAccess.Repositories
             }
         }
 
-        public async Task<ReadOnlyCollection<ExternalModel.QueryResults.TeamsInClubResult>> GetTeamsInClubAsync(string clubId)
+        public async Task<ReadOnlyCollection<ExternalModel.QueryResults.TeamsInClubResult>> GetTeamsInClubAsync(int clubId)
         {
             List<ExternalModel.QueryResults.TeamsInClubResult> teams = new List<ExternalModel.QueryResults.TeamsInClubResult>();
 
@@ -52,7 +51,7 @@ namespace DatabaseAccess.Repositories
             {
                 var databaseTeams = await context.Database.SqlQuery<TeamsInClubResult>(
                     "dbo.api_GetTeamsinClubID @clubId",
-                    new SqlParameter("clubId", int.Parse(clubId))).ToListAsync();
+                    new SqlParameter("clubId", clubId)).ToListAsync();
 
                 foreach (TeamsInClubResult team in databaseTeams)
                 {

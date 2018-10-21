@@ -28,14 +28,9 @@ namespace DatabaseAccess.Repositories
             return new ReadOnlyCollection<AllClubsResult>(clubs);
         }
 
-        public async Task<ExternalModel.Club> GetClubAsync(string clubReference)
+        public async Task<ExternalModel.Club> GetClubAsync(int clubId)
         {
             ExternalModel.Club newClub = null;
-
-            bool converts = int.TryParse(clubReference, out int clubId);
-
-            if (converts == false)
-                return null;
 
             using (var context = new DatabaseContext())
             {
