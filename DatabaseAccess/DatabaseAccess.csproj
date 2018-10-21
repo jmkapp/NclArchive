@@ -48,35 +48,35 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseContext.cs" />
-    <Compile Include="ExternalModel\AllClubsResult.cs" />
+    <Compile Include="ExternalModel\QueryResults\AllClubsResult.cs" />
     <Compile Include="ExternalModel\Club.cs" />
     <Compile Include="ExternalModel\Division.cs" />
     <Compile Include="ExternalModel\Season.cs" />
-    <Compile Include="ExternalModel\SeasonsForTeamResult.cs" />
+    <Compile Include="ExternalModel\QueryResults\SeasonsForTeamResult.cs" />
     <Compile Include="ExternalModel\Team.cs" />
-    <Compile Include="ExternalModel\TeamGameResult.cs" />
-    <Compile Include="ExternalModel\TeamsInClubResult.cs" />
+    <Compile Include="ExternalModel\QueryResults\TeamGameResult.cs" />
+    <Compile Include="ExternalModel\QueryResults\TeamsInClubResult.cs" />
     <Compile Include="ExternalModel\Venue.cs" />
     <Compile Include="InternalModel\Club.cs" />
     <Compile Include="InternalModel\Division.cs" />
     <Compile Include="InternalModel\Game.cs" />
     <Compile Include="Repositories\DivisionRepository.cs" />
-    <Compile Include="Repositories\IDivisionRepository.cs" />
-    <Compile Include="Repositories\ISeasonRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IDivisionRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ISeasonRepository.cs" />
     <Compile Include="Repositories\SeasonRepository.cs" />
-    <Compile Include="StoredProcedureResults\GetClubsResult.cs" />
+    <Compile Include="InternalModel\StoredProcedureResults\GetClubsResult.cs" />
     <Compile Include="InternalModel\Season.cs" />
-    <Compile Include="StoredProcedureResults\SeasonsForTeamResult.cs" />
+    <Compile Include="InternalModel\StoredProcedureResults\SeasonsForTeamResult.cs" />
     <Compile Include="InternalModel\Team.cs" />
-    <Compile Include="StoredProcedureResults\TeamGameResult.cs" />
-    <Compile Include="StoredProcedureResults\TeamsInClubResultcs.cs" />
+    <Compile Include="InternalModel\StoredProcedureResults\TeamGameResult.cs" />
+    <Compile Include="InternalModel\StoredProcedureResults\TeamsInClubResultcs.cs" />
     <Compile Include="InternalModel\Venue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ClubRepository.cs" />
     <Compile Include="Repositories\GameRepository.cs" />
-    <Compile Include="Repositories\IClubRepository.cs" />
-    <Compile Include="Repositories\IGameRepository.cs" />
-    <Compile Include="Repositories\ITeamRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IClubRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IGameRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ITeamRepository.cs" />
     <Compile Include="Repositories\TeamRepository.cs" />
   </ItemGroup>
   <ItemGroup>

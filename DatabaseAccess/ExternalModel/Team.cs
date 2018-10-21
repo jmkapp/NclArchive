@@ -2,7 +2,7 @@
 {
     public class Team
     {
-        private readonly string _teamId;
+        private readonly int _teamId;
         private readonly Club _club;
         private readonly string _shortName;
         private readonly string _longName;
@@ -14,7 +14,7 @@
         private readonly string _miniName;
 
         public Team(
-            string teamId,
+            int teamId,
             Club club,
             string shortName,
             string longName,
@@ -37,7 +37,7 @@
             _miniName = miniName;
         }
 
-        public string TeamId
+        public int TeamId
         {
             get { return _teamId; }
         }
@@ -90,7 +90,7 @@
         internal static Team Convert(InternalModel.Team team)
         {
             return new Team(
-                team.TeamId.ToString(),
+                team.TeamId,
                 team.Club == null ? null : Club.Convert(team.Club),
                 team.ShortName,
                 team.LongName,

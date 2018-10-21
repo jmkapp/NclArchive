@@ -1,11 +1,12 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using DatabaseAccess.ExternalModel.QueryResults;
 
-namespace DatabaseAccess.Repositories
+namespace DatabaseAccess.Repositories.Interfaces
 {
     public interface IClubRepository
     {
-        Task<ReadOnlyCollection<ExternalModel.AllClubsResult>> GetAllClubsAsync();
+        Task<ReadOnlyCollection<AllClubsResult>> GetAllClubsAsync();
         Task<ExternalModel.Club> GetClubAsync(string clubReference);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Web.Http;
 using DatabaseAccess.Repositories;
+using DatabaseAccess.Repositories.Interfaces;
 using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
 using SimpleInjector.Lifestyles;

@@ -107,12 +107,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Club.cs" />
-    <Compile Include="Models\ClubList.cs" />
+    <Compile Include="Models\Lists\ClubList.cs" />
     <Compile Include="Models\Division.cs" />
     <Compile Include="Models\Game.cs" />
-    <Compile Include="Models\GameList.cs" />
+    <Compile Include="Models\Lists\GameList.cs" />
     <Compile Include="Models\Resource.cs" />
-    <Compile Include="Models\ResourceList.cs" />
+    <Compile Include="Models\Lists\ResourceList.cs" />
     <Compile Include="Models\Season.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Models\Venue.cs" />

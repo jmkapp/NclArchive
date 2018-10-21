@@ -5,6 +5,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using DatabaseAccess.ExternalModel;
+using DatabaseAccess.ExternalModel.QueryResults;
+using DatabaseAccess.Repositories.Interfaces;
 using Division = DatabaseAccess.InternalModel.Division;
 using Venue = DatabaseAccess.InternalModel.Venue;
 
@@ -15,7 +17,7 @@ namespace DatabaseAccess.Repositories
         public async Task<ReadOnlyCollection<TeamGameResult>> GetGamesAsync(string teamReference,
             string seasonReference)
         {
-            List<ExternalModel.TeamGameResult> games = new List<ExternalModel.TeamGameResult>();
+            List<TeamGameResult> games = new List<TeamGameResult>();
 
             bool teamConverts = int.TryParse(teamReference, out int teamId);
             bool seasonConverts = int.TryParse(seasonReference, out int seasonId);
@@ -24,7 +26,7 @@ namespace DatabaseAccess.Repositories
 
             using (var context = new DatabaseContext())
             {
-                var databaseGames = await context.Database.SqlQuery<StoredProcedureResults.TeamGameResult>(
+                var databaseGames = await context.Database.SqlQuery<InternalModel.StoredProcedureResults.TeamGameResult>(
                     "dbo.api_GetTeamGames_asc @teamId, @seasonId",
                     new SqlParameter("teamId", teamId),
                     new SqlParameter("seasonId", seasonId)).ToListAsync();
@@ -41,31 +43,31 @@ namespace DatabaseAccess.Repositories
                 List<int> venueIds = databaseGames.Select(v => v.VenueId).Distinct().ToList();
                 List<Venue> venues = await context.Venues.Where(v => venueIds.Contains(v.VenueId)).ToListAsync();
 
-                foreach (StoredProcedureResults.TeamGameResult result in databaseGames)
+                foreach (InternalModel.StoredProcedureResults.TeamGameResult result in databaseGames)
                 {
                     Division division = divisions.FirstOrDefault(d => d.DivisionId == result.DivisionId);
                     Venue venue = venues.FirstOrDefault(v => v.VenueId == result.VenueId);
 
                     TeamGameResult game = new TeamGameResult(
                         result.ShortName,
-                        result.GameId.ToString(),
-                        result.HomeTeamId.HasValue ? result.HomeTeamId.ToString() : null,
+                        result.GameId,
+                        result.HomeTeamId,
                         Team.Convert(teams.SingleOrDefault(t => t.TeamId == result.HomeTeamId)),
-                        result.AwayTeamId.HasValue ? result.AwayTeamId.ToString() : null,
+                        result.AwayTeamId,
                         Team.Convert(teams.SingleOrDefault(t => t.TeamId == result.AwayTeamId)),
-                        result.HomeTeamHtScore.HasValue ? result.HomeTeamHtScore.ToString() : null,
-                        result.AwayTeamHtScore.HasValue ? result.AwayTeamHtScore.ToString() : null,
-                        result.HomeTeamScore.ToString(),
-                        result.AwayTeamScore.ToString(),
-                        result.GameDate.HasValue ? result.GameDate.ToString() : null,
+                        result.HomeTeamHtScore,
+                        result.AwayTeamHtScore,
+                        result.HomeTeamScore,
+                        result.AwayTeamScore,
+                        result.GameDate,
                         ExternalModel.Venue.Convert(venue),
                         ExternalModel.Division.Convert(division), 
                         result.DDate,
-                        result.TTime.ToString(),
+                        result.TTime,
                         result.GameStatus,
                         result.Comp,
-                        result.CompCupPoId.ToString(),
-                        result.GameTypeId.HasValue ? result.GameTypeId.ToString() : null,
+                        result.CompCupPoId,
+                        result.GameTypeId,
                         result.SeasonId,
                         result.SeasonName,
                         Season.Convert(season),
@@ -79,11 +81,11 @@ namespace DatabaseAccess.Repositories
             return new ReadOnlyCollection<TeamGameResult>(games);
         }
 
-        private List<int> GetGameIds(List<StoredProcedureResults.TeamGameResult> results)
+        private List<int> GetGameIds(List<InternalModel.StoredProcedureResults.TeamGameResult> results)
         {
             List<int> ids = new List<int>();
 
-            foreach (StoredProcedureResults.TeamGameResult result in results)
+            foreach (InternalModel.StoredProcedureResults.TeamGameResult result in results)
             {
                 if(result.HomeTeamId.HasValue)
                     ids.Add(result.HomeTeamId.Value);

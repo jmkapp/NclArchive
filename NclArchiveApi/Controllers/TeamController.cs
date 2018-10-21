@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using DatabaseAccess.ExternalModel;
+using DatabaseAccess.ExternalModel.QueryResults;
 using DatabaseAccess.Repositories;
+using DatabaseAccess.Repositories.Interfaces;
 using Club = NclArchiveApi.Models.Club;
 using Season = NclArchiveApi.Models.Season;
 using Team = NclArchiveApi.Models.Team;
@@ -43,7 +45,7 @@ namespace NclArchiveApi.Controllers
             if (databaseTeam.Club != null)
             {
                 club = new Club();
-                club.ClubId = databaseTeam.Club.ClubId.ToString();
+                club.ClubId = databaseTeam.Club.ClubId;
                 club.ShortName = databaseTeam.Club.ShortName;
                 club.Link = Url.Content("~/") + "club/" + databaseTeam.Club.ClubId;
             }

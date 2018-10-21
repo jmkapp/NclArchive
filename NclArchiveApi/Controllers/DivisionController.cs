@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using DatabaseAccess.Repositories;
+using DatabaseAccess.Repositories.Interfaces;
 
 namespace NclArchiveApi.Controllers
 {

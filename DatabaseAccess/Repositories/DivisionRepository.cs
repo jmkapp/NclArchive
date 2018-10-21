@@ -1,6 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Threading.Tasks;
 using DatabaseAccess.ExternalModel;
+using DatabaseAccess.Repositories.Interfaces;
 
 namespace DatabaseAccess.Repositories
 {

@@ -6,7 +6,7 @@ namespace NclArchiveApi.Models
     public class Club
     {
         [JsonProperty(PropertyName = "clubId")]
-        public string ClubId { get; set; }
+        public int ClubId { get; set; }
         [JsonProperty(PropertyName = "shortName")]
         public string ShortName { get; set; }
         [JsonProperty(PropertyName = "longName")]
@@ -14,7 +14,7 @@ namespace NclArchiveApi.Models
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
         [JsonProperty(PropertyName = "venueId")]
-        public string VenueId { get; set; }
+        public int? VenueId { get; set; }
         [JsonProperty(PropertyName = "url")]
         public string Url { get; set; }
         [JsonProperty(PropertyName = "imageFile")]
@@ -34,9 +34,9 @@ namespace NclArchiveApi.Models
         [JsonProperty(PropertyName = "fax")]
         public string Fax { get; set; }
         [JsonProperty(PropertyName = "customerId")]
-        public string CustomerId { get; set; }
+        public int? CustomerId { get; set; }
         [JsonProperty(PropertyName = "associationId")]
-        public string AssociationId { get; set; }
+        public int? AssociationId { get; set; }
         [JsonProperty(PropertyName = "link")]
         public string Link { get; set; }
         [JsonProperty(PropertyName = "teamsLink")]
@@ -47,11 +47,11 @@ namespace NclArchiveApi.Models
         internal static Club Convert(DatabaseAccess.ExternalModel.Club club)
         {
             Club newClub = new Club();
-            newClub.ClubId = club.ClubId.ToString();
+            newClub.ClubId = club.ClubId;
             newClub.ShortName = club.ShortName;
             newClub.LongName = club.LongName;
             newClub.Description = club.Description;
-            newClub.VenueId = club.VenueId?.ToString();
+            newClub.VenueId = club.VenueId;
             newClub.Url = club.Url;
             newClub.ImageFile = club.ImageFile;
             newClub.ContactName = club.ContactName;
@@ -61,8 +61,8 @@ namespace NclArchiveApi.Models
             newClub.Postcode = club.Postcode;
             newClub.Telephone = club.Telephone;
             newClub.Fax = club.Fax;
-            newClub.CustomerId = club.CustomerId?.ToString();
-            newClub.AssociationId = club.AssociationId?.ToString();
+            newClub.CustomerId = club.CustomerId;
+            newClub.AssociationId = club.AssociationId;
 
             return newClub;
         }

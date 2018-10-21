@@ -1,28 +1,28 @@
 ﻿using System;
 
-namespace DatabaseAccess.ExternalModel
+namespace DatabaseAccess.ExternalModel.QueryResults
 {
     public class TeamGameResult
     {
-        private readonly string _gameId;
+        private readonly int _gameId;
         private readonly string _shortName;
-        private readonly string _homeTeamId;
+        private readonly int? _homeTeamId;
         private readonly Team _homeTeam;
-        private readonly string _awayTeamId;
+        private readonly int? _awayTeamId;
         private readonly Team _awayTeam;
-        private readonly string _homeTeamHtScore;
-        private readonly string _awayTeamHtScore;
-        private readonly string _homeTeamScore;
-        private readonly string _awayTeamScore;
-        private readonly string _gameDate;
+        private readonly int? _homeTeamHtScore;
+        private readonly int? _awayTeamHtScore;
+        private readonly int _homeTeamScore;
+        private readonly int _awayTeamScore;
+        private readonly DateTime? _gameDate;
         private readonly Venue _venue;
         private readonly Division _division;
         private readonly string _dDate;
-        private readonly string _tTime;
+        private readonly int _tTime;
         private readonly string _gameStatus;
         private readonly string _comp;
-        private readonly string _compCupPoId;
-        private readonly string _gameTypeId;
+        private readonly int _compCupPoId;
+        private readonly int? _gameTypeId;
         private readonly int _seasonId;
         private readonly string _seasonName;
         private readonly Season _season;
@@ -31,24 +31,24 @@ namespace DatabaseAccess.ExternalModel
 
         public TeamGameResult(
             string shortName,
-            string gameId,
-            string homeTeamId,
+            int gameId,
+            int? homeTeamId,
             Team homeTeam,
-            string awayTeamId,
+            int? awayTeamId,
             Team awayTeam,
-            string homeTeamHtScore,
-            string awayTeamHtScore,
-            string homeTeamScore,
-            string awayTeamScore,
-            string gameDate,
+            int? homeTeamHtScore,
+            int? awayTeamHtScore,
+            int homeTeamScore,
+            int awayTeamScore,
+            DateTime? gameDate,
             Venue venue,
             Division division,
             string dDate,
-            string tTime,
+            int tTime,
             string gameStatus,
             string comp,
-            string compCupPoId,
-            string gameTypeId,
+            int compCupPoId,
+            int? gameTypeId,
             int seasonId,
             string seasonName,
             Season season,
@@ -82,7 +82,7 @@ namespace DatabaseAccess.ExternalModel
             _awayTeamName = awayTeamName;
         }
 
-        public string GameId
+        public int GameId
         {
             get { return _gameId; }
         }
@@ -92,7 +92,7 @@ namespace DatabaseAccess.ExternalModel
             get { return _shortName; }
         }
 
-        public string HomeTeamId
+        public int? HomeTeamId
         {
             get { return _homeTeamId; }
         }
@@ -102,7 +102,7 @@ namespace DatabaseAccess.ExternalModel
             get { return _homeTeam; }
         }
 
-        public string AwayTeamId
+        public int? AwayTeamId
         {
             get { return _awayTeamId; }
         }
@@ -112,27 +112,27 @@ namespace DatabaseAccess.ExternalModel
             get { return _awayTeam; }
         }
 
-        public string HomeTeamHtScore
+        public int? HomeTeamHtScore
         {
             get { return _homeTeamHtScore; }
         }
 
-        public string AwayTeamHtScore
+        public int? AwayTeamHtScore
         {
             get { return _awayTeamHtScore; }
         }
 
-        public string HomeTeamScore
+        public int HomeTeamScore
         {
             get { return _homeTeamScore; }
         }
 
-        public string AwayTeamScore
+        public int AwayTeamScore
         {
             get { return _awayTeamScore; }
         }
 
-        public string GameDate
+        public DateTime? GameDate
         {
             get { return _gameDate; }
         }
@@ -147,12 +147,12 @@ namespace DatabaseAccess.ExternalModel
             get { return _division; }
         }
 
-        public string CompCupPoId
+        public int CompCupPoId
         {
             get { return _compCupPoId; }
         }
 
-        public string GameTypeId
+        public int? GameTypeId
         {
             get { return _gameTypeId; }
         }
@@ -162,7 +162,7 @@ namespace DatabaseAccess.ExternalModel
             get { return _dDate; }
         }
 
-        public string TTime
+        public int TTime
         {
             get { return _tTime; }
         }

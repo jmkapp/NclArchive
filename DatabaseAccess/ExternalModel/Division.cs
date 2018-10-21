@@ -2,7 +2,7 @@
 {
     public class Division
     {
-        private readonly string _divisionId;
+        private readonly int _divisionId;
         private readonly string _miniName;
         private readonly string _shortName;
         private readonly string _longName;
@@ -20,7 +20,7 @@
         private readonly bool? _useBonusPoints;
 
         public Division(
-            string divisionId,
+            int divisionId,
             string miniName,
             string shortName,
             string longName,
@@ -55,7 +55,7 @@
             _useBonusPoints = useBonusPoints;
         }
 
-        public string DivisionId => _divisionId;
+        public int DivisionId => _divisionId;
 
         public string MiniName => _miniName;
 
@@ -90,7 +90,7 @@
         internal static Division Convert(InternalModel.Division division)
         {
             return new Division(
-                division.DivisionId.ToString(),
+                division.DivisionId,
                 division.MiniName,
                 division.ShortName,
                 division.LongName,

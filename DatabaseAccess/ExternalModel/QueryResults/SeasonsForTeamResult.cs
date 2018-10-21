@@ -1,17 +1,17 @@
-﻿namespace DatabaseAccess.ExternalModel
+﻿namespace DatabaseAccess.ExternalModel.QueryResults
 {
     public class SeasonsForTeamResult
     {
-        private readonly string _seasonId;
+        private readonly int _seasonId;
         private readonly string _shortName;
 
-        public SeasonsForTeamResult(string seasonId, string shortName)
+        public SeasonsForTeamResult(int seasonId, string shortName)
         {
             _seasonId = seasonId;
             _shortName = shortName;
         }
 
-        public string SeasonId
+        public int SeasonId
         {
             get { return _seasonId; }
         }

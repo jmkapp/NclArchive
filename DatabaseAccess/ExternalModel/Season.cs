@@ -4,7 +4,7 @@ namespace DatabaseAccess.ExternalModel
 {
     public class Season
     {
-        private readonly string _seasonId;
+        private readonly int _seasonId;
         private readonly string _shortName;
         private readonly string _longName;
         private readonly DateTime _startDate;
@@ -12,7 +12,7 @@ namespace DatabaseAccess.ExternalModel
         private readonly bool _winterSeason;
 
         public Season(
-            string seasonId,
+            int seasonId,
             string shortName,
             string longName,
             DateTime startDate,
@@ -27,7 +27,7 @@ namespace DatabaseAccess.ExternalModel
             _winterSeason = winterSeason;
         }
 
-        public string SeasonId
+        public int SeasonId
         {
             get { return _seasonId; }
         }
@@ -60,7 +60,7 @@ namespace DatabaseAccess.ExternalModel
         internal static Season Convert(InternalModel.Season season)
         {
             return new Season(
-                season.SeasonId.ToString(),
+                season.SeasonId,
                 season.ShortName,
                 season.LongName,
                 season.StartDate,

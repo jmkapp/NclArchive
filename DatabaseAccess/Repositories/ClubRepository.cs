@@ -2,15 +2,17 @@
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Threading.Tasks;
-using DatabaseAccess.StoredProcedureResults;
+using DatabaseAccess.ExternalModel.QueryResults;
+using DatabaseAccess.InternalModel.StoredProcedureResults;
+using DatabaseAccess.Repositories.Interfaces;
 
 namespace DatabaseAccess.Repositories
 {
     public class ClubRepository : IClubRepository
     { 
-        public async Task<ReadOnlyCollection<ExternalModel.AllClubsResult>> GetAllClubsAsync()
+        public async Task<ReadOnlyCollection<AllClubsResult>> GetAllClubsAsync()
         {
-            List<ExternalModel.AllClubsResult> clubs = new List<ExternalModel.AllClubsResult>();
+            List<AllClubsResult> clubs = new List<AllClubsResult>();
 
             using (var context = new DatabaseContext())
             {
@@ -18,12 +20,12 @@ namespace DatabaseAccess.Repositories
 
                 foreach (GetClubsResult databaseClub in databaseClubs)
                 {
-                    ExternalModel.AllClubsResult newClub = new ExternalModel.AllClubsResult(databaseClub.ClubId.ToString(), databaseClub.ShortName, databaseClub.LongName);
+                    AllClubsResult newClub = new AllClubsResult(databaseClub.ClubId, databaseClub.ShortName, databaseClub.LongName);
                     clubs.Add(newClub);
                 }
             }
 
-            return new ReadOnlyCollection<ExternalModel.AllClubsResult>(clubs);
+            return new ReadOnlyCollection<AllClubsResult>(clubs);
         }
 
         public async Task<ExternalModel.Club> GetClubAsync(string clubReference)

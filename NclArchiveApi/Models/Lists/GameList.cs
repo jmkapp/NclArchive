@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace NclArchiveApi.Models
+namespace NclArchiveApi.Models.Lists
 {
     public class GameList
     {

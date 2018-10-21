@@ -6,7 +6,7 @@ namespace NclArchiveApi.Models
     public class Season
     {
         [JsonProperty(PropertyName = "seasonId")]
-        public string SeasonId { get; set; }
+        public int SeasonId { get; set; }
         [JsonProperty(PropertyName = "shortName")]
         public string ShortName { get; set; }
         [JsonProperty(PropertyName = "longName")]

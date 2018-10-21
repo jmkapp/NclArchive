@@ -1,4 +1,6 @@
-﻿using DatabaseAccess.ExternalModel;
+﻿using System;
+using DatabaseAccess.ExternalModel;
+using DatabaseAccess.ExternalModel.QueryResults;
 using Newtonsoft.Json;
 
 namespace NclArchiveApi.Models
@@ -6,7 +8,7 @@ namespace NclArchiveApi.Models
     public class Game
     {
         [JsonProperty(PropertyName = "gameId")]
-        public string GameId { get; set; }
+        public int GameId { get; set; }
         [JsonProperty(PropertyName = "shortName")]
         public string ShortName { get; set; }
         [JsonProperty(PropertyName = "homeTeam")]
@@ -14,15 +16,15 @@ namespace NclArchiveApi.Models
         [JsonProperty(PropertyName = "awayTeam")]
         public Team AwayTeam { get; set; }
         [JsonProperty(PropertyName = "homeTeamHtScore")]
-        public string HomeTeamHtScore { get; set; }
+        public int? HomeTeamHtScore { get; set; }
         [JsonProperty(PropertyName = "awayTeamHtScore")]
-        public string AwayTeamHtScore { get; set; }
+        public int? AwayTeamHtScore { get; set; }
         [JsonProperty(PropertyName = "homeTeamScore")]
-        public string HomeTeamScore { get; set; }
+        public int HomeTeamScore { get; set; }
         [JsonProperty(PropertyName = "awayTeamScore")]
-        public string AwayTeamScore { get; set; }
+        public int AwayTeamScore { get; set; }
         [JsonProperty(PropertyName = "gameDate")]
-        public string GameDate { get; set; }
+        public DateTime? GameDate { get; set; }
         [JsonProperty(PropertyName = "venue")]
         public Venue Venue { get; set; }
         [JsonProperty(PropertyName = "division")]
@@ -30,21 +32,21 @@ namespace NclArchiveApi.Models
         [JsonProperty(PropertyName = "dDate")]
         public string Ddate { get; set; }
         [JsonProperty(PropertyName = "tTime")]
-        public string Ttime { get; set; }
+        public int Ttime { get; set; }
         [JsonProperty(PropertyName = "gameStatus")]
         public string GameStatus { get; set; }
         [JsonProperty(PropertyName = "comp")]
         public string Comp { get; set; }
         [JsonProperty(PropertyName = "compCupPoId")]
-        public string CompCupPoId { get; set; }
+        public int CompCupPoId { get; set; }
         [JsonProperty(PropertyName = "gameTypeId")]
-        public string GameTypeId { get; set; }
+        public int? GameTypeId { get; set; }
         [JsonProperty(PropertyName = "season")]
         public Season Season { get; set; }
         [JsonProperty(PropertyName = "link")]
         public string Link { get; set; }
 
-        internal static Game Convert(DatabaseAccess.ExternalModel.TeamGameResult result)
+        internal static Game Convert(TeamGameResult result)
         {
             Game game = new Game();
             game.GameId = result.GameId;

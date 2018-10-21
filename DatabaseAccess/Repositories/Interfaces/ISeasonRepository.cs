@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace DatabaseAccess.Repositories
+namespace DatabaseAccess.Repositories.Interfaces
 {
     public interface ISeasonRepository
     {

@@ -1,13 +1,13 @@
-﻿namespace DatabaseAccess.ExternalModel
+﻿namespace DatabaseAccess.ExternalModel.QueryResults
 {
     public class TeamsInClubResult
     {
-        private readonly string _teamId;
+        private readonly int _teamId;
         private readonly string _teamName;
         private readonly bool _nclTeam;
         private readonly string _longName;
 
-        public TeamsInClubResult(string teamId, string teamName, bool nclTeam, string longName)
+        public TeamsInClubResult(int teamId, string teamName, bool nclTeam, string longName)
         {
             _teamId = teamId;
             _teamName = teamName;
@@ -15,7 +15,7 @@
             _longName = longName;
         }
 
-        public string TeamId
+        public int TeamId
         {
             get { return _teamId; }
         }

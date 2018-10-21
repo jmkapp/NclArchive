@@ -1,17 +1,17 @@
-﻿namespace DatabaseAccess.ExternalModel
+﻿namespace DatabaseAccess.ExternalModel.QueryResults
 {
     public class AllClubsResult
     {
-        private readonly string _clubId;
+        private readonly int _clubId;
         private readonly string _shortName;
         private readonly string _longName;
-        public AllClubsResult(string clubId, string shortName, string longName)
+        public AllClubsResult(int clubId, string shortName, string longName)
         {
             _clubId = clubId;
             _shortName = shortName;
             _longName = longName;
         }
-        public string ClubId
+        public int ClubId
         {
             get { return _clubId; }
         }

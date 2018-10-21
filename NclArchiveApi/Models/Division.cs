@@ -5,7 +5,7 @@ namespace NclArchiveApi.Models
     public class Division
     {
         [JsonProperty(PropertyName = "divisionId")]
-        public string DivisionId { get; set; }
+        public int DivisionId { get; set; }
         [JsonProperty(PropertyName = "miniName")]
         public string MiniName { get; set; }
         [JsonProperty(PropertyName = "shortName")]

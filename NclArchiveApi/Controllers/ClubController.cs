@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using DatabaseAccess.ExternalModel;
+using DatabaseAccess.ExternalModel.QueryResults;
+using DatabaseAccess.Repositories.Interfaces;
+using NclArchiveApi.Models.Lists;
 using Club = NclArchiveApi.Models.Club;
 
 namespace NclArchiveApi.Controllers
@@ -72,7 +75,7 @@ namespace NclArchiveApi.Controllers
                 return NotFound();
 
             Club newClub = new Club();
-            newClub.ClubId = databaseClub.ClubId.ToString();
+            newClub.ClubId = databaseClub.ClubId;
             newClub.ShortName = databaseClub.ShortName;
             newClub.LongName = databaseClub.LongName;
             newClub.Description = databaseClub.Description;
@@ -107,7 +110,7 @@ namespace NclArchiveApi.Controllers
             ReadOnlyCollection<TeamsInClubResult> databaseTeams = await _teamRepository.GetTeamsInClubAsync(clubId);
 
             Club club = new Club();
-            club.ClubId = databaseClub.ClubId.ToString();
+            club.ClubId = databaseClub.ClubId;
             club.ShortName = databaseClub.ShortName;
             club.Link = Url.Content("~/") + "club/" + club.ClubId;
 

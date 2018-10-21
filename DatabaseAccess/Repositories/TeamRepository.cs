@@ -4,8 +4,9 @@ using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using DatabaseAccess.ExternalModel;
-using SeasonsForTeamResult = DatabaseAccess.StoredProcedureResults.SeasonsForTeamResult;
-using TeamsInClubResult = DatabaseAccess.StoredProcedureResults.TeamsInClubResult;
+using DatabaseAccess.Repositories.Interfaces;
+using SeasonsForTeamResult = DatabaseAccess.InternalModel.StoredProcedureResults.SeasonsForTeamResult;
+using TeamsInClubResult = DatabaseAccess.InternalModel.StoredProcedureResults.TeamsInClubResult;
 
 namespace DatabaseAccess.Repositories
 {
@@ -27,7 +28,7 @@ namespace DatabaseAccess.Repositories
                 if (team != null)
                 {
                     newTeam = new ExternalModel.Team(
-                        team.TeamId.ToString(),
+                        team.TeamId,
                         ExternalModel.Club.Convert(team.Club),
                         team.ShortName,
                         team.LongName,
@@ -43,9 +44,9 @@ namespace DatabaseAccess.Repositories
             }
         }
 
-        public async Task<ReadOnlyCollection<ExternalModel.TeamsInClubResult>> GetTeamsInClubAsync(string clubId)
+        public async Task<ReadOnlyCollection<ExternalModel.QueryResults.TeamsInClubResult>> GetTeamsInClubAsync(string clubId)
         {
-            List<ExternalModel.TeamsInClubResult> teams = new List<ExternalModel.TeamsInClubResult>();
+            List<ExternalModel.QueryResults.TeamsInClubResult> teams = new List<ExternalModel.QueryResults.TeamsInClubResult>();
 
             using (var context = new DatabaseContext())
             {
@@ -55,8 +56,8 @@ namespace DatabaseAccess.Repositories
 
                 foreach (TeamsInClubResult team in databaseTeams)
                 {
-                    ExternalModel.TeamsInClubResult newTeam = new ExternalModel.TeamsInClubResult(
-                        team.TeamId.ToString(),
+                    ExternalModel.QueryResults.TeamsInClubResult newTeam = new ExternalModel.QueryResults.TeamsInClubResult(
+                        team.TeamId,
                         team.TeamName,
                         team.NclTeam == "NCL",
                         team.LongName
@@ -66,12 +67,12 @@ namespace DatabaseAccess.Repositories
                 }
             }
 
-            return new ReadOnlyCollection<ExternalModel.TeamsInClubResult>(teams);
+            return new ReadOnlyCollection<ExternalModel.QueryResults.TeamsInClubResult>(teams);
         }
 
-        public async Task<ReadOnlyCollection<ExternalModel.SeasonsForTeamResult>> GetSeasonsForTeamsAsync(string teamReference)
+        public async Task<ReadOnlyCollection<ExternalModel.QueryResults.SeasonsForTeamResult>> GetSeasonsForTeamsAsync(string teamReference)
         {
-            List<ExternalModel.SeasonsForTeamResult> seasons = new List<ExternalModel.SeasonsForTeamResult>();
+            List<ExternalModel.QueryResults.SeasonsForTeamResult> seasons = new List<ExternalModel.QueryResults.SeasonsForTeamResult>();
 
             bool converts = int.TryParse(teamReference, out int teamId);
 
@@ -86,15 +87,15 @@ namespace DatabaseAccess.Repositories
 
                 foreach (SeasonsForTeamResult season in databaseSeasons)
                 {
-                    ExternalModel.SeasonsForTeamResult newSeason = new ExternalModel.SeasonsForTeamResult(
-                        season.SeasonId.ToString(),
+                    ExternalModel.QueryResults.SeasonsForTeamResult newSeason = new ExternalModel.QueryResults.SeasonsForTeamResult(
+                        season.SeasonId,
                         season.ShortName);
 
                     seasons.Add(newSeason);
                 }
             }
 
-            return new ReadOnlyCollection<ExternalModel.SeasonsForTeamResult>(seasons);
+            return new ReadOnlyCollection<ExternalModel.QueryResults.SeasonsForTeamResult>(seasons);
         }
     }
 }
