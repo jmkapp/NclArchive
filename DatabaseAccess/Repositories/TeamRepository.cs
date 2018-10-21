@@ -11,14 +11,9 @@ namespace DatabaseAccess.Repositories
 {
     public class TeamRepository : ITeamRepository
     {
-        public async Task<ExternalModel.Team> GetTeamAsync(string teamReference)
+        public async Task<ExternalModel.Team> GetTeamAsync(int teamId)
         {
             ExternalModel.Team newTeam = null;
-
-            bool converts = int.TryParse(teamReference, out int teamId);
-
-            if (converts == false)
-                return null;
 
             using (var context = new DatabaseContext())
             {
@@ -69,13 +64,9 @@ namespace DatabaseAccess.Repositories
             return new ReadOnlyCollection<ExternalModel.QueryResults.TeamsInClubResult>(teams);
         }
 
-        public async Task<ReadOnlyCollection<ExternalModel.QueryResults.SeasonsForTeamResult>> GetSeasonsForTeamsAsync(string teamReference)
+        public async Task<ReadOnlyCollection<ExternalModel.QueryResults.SeasonsForTeamResult>> GetSeasonsForTeamsAsync(int teamId)
         {
             List<ExternalModel.QueryResults.SeasonsForTeamResult> seasons = new List<ExternalModel.QueryResults.SeasonsForTeamResult>();
-
-            bool converts = int.TryParse(teamReference, out int teamId);
-
-            if (!converts) return null;
 
             using (var context = new DatabaseContext())
             {

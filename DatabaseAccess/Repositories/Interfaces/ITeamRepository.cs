@@ -6,8 +6,8 @@ namespace DatabaseAccess.Repositories.Interfaces
 {
     public interface ITeamRepository
     {
-        Task<ExternalModel.Team> GetTeamAsync(string teamReference);
+        Task<ExternalModel.Team> GetTeamAsync(int teamId);
         Task<ReadOnlyCollection<TeamsInClubResult>> GetTeamsInClubAsync(int clubId);
-        Task<ReadOnlyCollection<SeasonsForTeamResult>> GetSeasonsForTeamsAsync(string teamId);
+        Task<ReadOnlyCollection<SeasonsForTeamResult>> GetSeasonsForTeamsAsync(int teamId);
     }
 }

@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using DatabaseAccess.ExternalModel;
 using DatabaseAccess.ExternalModel.QueryResults;
-using DatabaseAccess.Repositories;
 using DatabaseAccess.Repositories.Interfaces;
 using Club = NclArchiveApi.Models.Club;
 using Season = NclArchiveApi.Models.Season;
@@ -29,12 +24,17 @@ namespace NclArchiveApi.Controllers
         [Route("team/{teamId}")]
         [HttpGet]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        public async Task<IHttpActionResult> Get(string teamId)
+        public async Task<IHttpActionResult> Get(string teamReference)
         {
             Authorizer authorizer = new Authorizer(Request.Headers.Authorization);
 
             if (!authorizer.Authorized)
                 return Content(HttpStatusCode.Unauthorized, authorizer.RejectionMessage);
+
+            bool converts = int.TryParse(teamReference, out int teamId);
+
+            if (converts == false)
+                return BadRequest();
 
             DatabaseAccess.ExternalModel.Team databaseTeam = await _teamRepository.GetTeamAsync(teamId);
 
@@ -70,12 +70,17 @@ namespace NclArchiveApi.Controllers
         [Route("team/{teamId}/seasons")]
         [HttpGet]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        public async Task<IHttpActionResult> GetSeasons(string teamId)
+        public async Task<IHttpActionResult> GetSeasons(string teamReference)
         {
             Authorizer authorizer = new Authorizer(Request.Headers.Authorization);
 
             if (!authorizer.Authorized)
                 return Content(HttpStatusCode.Unauthorized, authorizer.RejectionMessage);
+
+            bool converts = int.TryParse(teamReference, out int teamId);
+
+            if (converts == false)
+                return BadRequest();
 
             DatabaseAccess.ExternalModel.Team databaseTeam = await _teamRepository.GetTeamAsync(teamId);
 
