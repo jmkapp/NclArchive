@@ -5,7 +5,7 @@ namespace NclArchiveApi.Models
     public class Venue
     {
         [JsonProperty(PropertyName = "venueId")]
-        public string VenueId { get; set; }
+        public int VenueId { get; set; }
         [JsonProperty(PropertyName = "shortName")]
         public string ShortName { get; set; }
         [JsonProperty(PropertyName = "link")]

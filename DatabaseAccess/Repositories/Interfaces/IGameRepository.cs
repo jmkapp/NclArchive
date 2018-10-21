@@ -6,6 +6,7 @@ namespace DatabaseAccess.Repositories.Interfaces
 {
     public interface IGameRepository
     {
+        Task<ExternalModel.Game> GetGameAsync(int gameId);
         Task<ReadOnlyCollection<TeamGameResult>> GetGamesAsync(string teamReference, string seasonReference);
     }
 }

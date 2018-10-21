@@ -33,6 +33,9 @@ namespace NclArchiveApi.Controllers
 
             DatabaseAccess.ExternalModel.Division databaseDivision = await _divisionRepository.GetDivisionAsync(divisionId);
 
+            if (databaseDivision == null)
+                return NotFound();
+
             Models.Division division = Models.Division.Convert(databaseDivision);
 
             division.Link = Url.Content("~/") + "division/" + databaseDivision.DivisionId;

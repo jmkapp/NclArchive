@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseContext.cs" />
+    <Compile Include="ExternalModel\Game.cs" />
     <Compile Include="ExternalModel\QueryResults\AllClubsResult.cs" />
     <Compile Include="ExternalModel\Club.cs" />
     <Compile Include="ExternalModel\Division.cs" />

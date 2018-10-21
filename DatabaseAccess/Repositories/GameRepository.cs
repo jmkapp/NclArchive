@@ -14,6 +14,26 @@ namespace DatabaseAccess.Repositories
 {
     public class GameRepository : IGameRepository
     {
+        public async Task<ExternalModel.Game> GetGameAsync(int gameId)
+        {
+            Game newGame = null;
+
+            using (var context = new DatabaseContext())
+            {
+                InternalModel.Game game = await context.Games
+                    .Include(t => t.HomeTeam)
+                    .Include(t => t.AwayTeam)
+                    .Include(v => v.Venue)
+                    .Include(d => d.Division)
+                    .FirstOrDefaultAsync(g => g.GameId == gameId);
+
+                if (game != null)
+                    newGame = Game.Convert(game);
+            }
+
+            return newGame;
+        }
+
         public async Task<ReadOnlyCollection<TeamGameResult>> GetGamesAsync(string teamReference,
             string seasonReference)
         {

@@ -25,6 +25,8 @@ namespace DatabaseAccess.InternalModel
         public int AwayTeamScore { get; set; }
         [Column("venueid")]
         public int VenueId { get; set; }
+        [ForeignKey("VenueId")]
+        public virtual Venue Venue { get; set; }
         [Column("Referee")]
         public int? RefereeId { get; set; }
         [Column("Line1")]
@@ -33,6 +35,8 @@ namespace DatabaseAccess.InternalModel
         public int? Line2Id { get; set; }
         [Column("DivisionID")]
         public int DivisionId { get; set; }
+        [ForeignKey("DivisionId")]
+        public virtual Division Division { get; set; }
         [Column("CompCupPOId")]
         public int CompCupPoId { get; set; }
         [Column("GameTypeid")]

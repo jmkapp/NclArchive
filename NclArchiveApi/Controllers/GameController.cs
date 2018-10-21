@@ -14,6 +14,7 @@ using Division = NclArchiveApi.Models.Division;
 using Season = NclArchiveApi.Models.Season;
 using Team = NclArchiveApi.Models.Team;
 using Venue = NclArchiveApi.Models.Venue;
+using Game = NclArchiveApi.Models.Game;
 
 namespace NclArchiveApi.Controllers
 {
@@ -24,6 +25,69 @@ namespace NclArchiveApi.Controllers
         public GameController(IGameRepository gamerepository)
         {
             _gameRepository = gamerepository;
+        }
+
+        [Route("game/{gameReference}")]
+        [HttpGet]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        public async Task<IHttpActionResult> Get(string gameReference)
+        {
+            Authorizer authorizer = new Authorizer(Request.Headers.Authorization);
+
+            if (!authorizer.Authorized)
+                return Content(HttpStatusCode.Unauthorized, authorizer.RejectionMessage);
+
+            bool converts = int.TryParse(gameReference, out int gameId);
+
+            if (converts == false)
+                return BadRequest();
+
+            DatabaseAccess.ExternalModel.Game databaseGame = await _gameRepository.GetGameAsync(gameId);
+
+            if (databaseGame == null)
+                return NotFound();
+
+            Game game = Game.Convert(databaseGame);
+
+            if (databaseGame.HomeTeam != null)
+            {
+                Team newHomeTeam = new Team();
+                newHomeTeam.TeamId = databaseGame.HomeTeam.TeamId;
+                newHomeTeam.ShortName = databaseGame.HomeTeam.ShortName;
+                newHomeTeam.Link = Url.Content("~/") + "team/" + databaseGame.HomeTeam.TeamId;
+                game.HomeTeam = newHomeTeam;
+            }
+
+            if (databaseGame.AwayTeam != null)
+            {
+                Team newAwayTeam = new Team();
+                newAwayTeam.TeamId = databaseGame.AwayTeam.TeamId;
+                newAwayTeam.ShortName = databaseGame.AwayTeam.ShortName;
+                newAwayTeam.Link = Url.Content("~/") + "team/" + databaseGame.AwayTeam.TeamId;
+                game.AwayTeam = newAwayTeam;
+            }
+
+            if (databaseGame.Venue != null)
+            {
+                Venue newVenue = new Venue();
+                newVenue.VenueId = databaseGame.Venue.VenueId;
+                newVenue.ShortName = databaseGame.Venue.ShortName;
+                newVenue.Link = Url.Content("~/") + "venue/" + databaseGame.Venue.VenueId;
+                game.Venue = newVenue;
+            }
+
+            if (databaseGame.Division != null)
+            {
+                Division newDivision = new Division();
+                newDivision.DivisionId = databaseGame.Division.DivisionId;
+                newDivision.ShortName = databaseGame.Division.ShortName;
+                newDivision.Link = Url.Content("~/") + "division/" + databaseGame.Division.DivisionId;
+                game.Division = newDivision;
+            }
+
+            game.Link = Url.Content("~/") + "game/" + databaseGame.GameId;
+
+            return Ok(game);
         }
 
         [Route("games")]
@@ -89,7 +153,7 @@ namespace NclArchiveApi.Controllers
                 if (result.Venue != null)
                 {
                     Venue venue = new Venue();
-                    venue.VenueId = result.Venue.VenueId.ToString();
+                    venue.VenueId = result.Venue.VenueId;
                     venue.ShortName = result.Venue.ShortName;
                     venue.Link = Url.Content("~/") + "venue/" + result.Venue.VenueId;
 
