@@ -2,11 +2,11 @@
 {
     public class Club
     {
-        private readonly string _clubId;
+        private readonly int _clubId;
         private readonly string _shortName;
         private readonly string _longName;
         private readonly string _description;
-        private readonly string _venueId;
+        private readonly int? _venueId;
         private readonly string _url;
         private readonly string _imageFile;
         private readonly string _contactName;
@@ -16,15 +16,15 @@
         private readonly string _postcode;
         private readonly string _telephone;
         private readonly string _fax;
-        private readonly string _customerId;
-        private readonly string _associationId;
+        private readonly int? _customerId;
+        private readonly int? _associationId;
 
         public Club(
-            string clubId,
+            int clubId,
             string shortName,
             string longName,
             string description,
-            string venueId,
+            int? venueId,
             string url,
             string imageFile,
             string contactName,
@@ -34,8 +34,8 @@
             string postcode,
             string telephone,
             string fax,
-            string customerId,
-            string associationId)
+            int? customerId,
+            int? associationId)
         {
             _clubId = clubId;
             _shortName = shortName;
@@ -55,7 +55,7 @@
             _associationId = associationId;
         }
 
-        public string ClubId
+        public int ClubId
         {
             get { return _clubId; }
         }
@@ -76,7 +76,7 @@
             get { return _description; }
         }
 
-        public string VenueId
+        public int? VenueId
         {
             get { return _venueId; }
         }
@@ -126,12 +126,12 @@
             get { return _fax; }
         }
 
-        public string CustomerId
+        public int? CustomerId
         {
             get { return _customerId; }
         }
 
-        public string AssociationId
+        public int? AssociationId
         {
             get { return _associationId; }
         }
@@ -139,11 +139,11 @@
         internal static Club Convert(InternalModel.Club club)
         {
             return new Club(
-                club.ClubId.ToString(),
+                club.ClubId,
                 club.ShortName,
                 club.LongName,
                 club.Description,
-                club.VenueId.ToString(),
+                club.VenueId,
                 club.Url,
                 club.ImageFile,
                 club.ContactName,
@@ -153,8 +153,8 @@
                 club.Postcode,
                 club.Telephone,
                 club.Fax,
-                club.CustomerId.ToString(),
-                club.AssociationId.ToString()
+                club.CustomerId,
+                club.AssociationId
             );
         }
     }

@@ -72,7 +72,7 @@ namespace NclArchiveApi.Controllers
                 return NotFound();
 
             Club newClub = new Club();
-            newClub.ClubId = databaseClub.ClubId;
+            newClub.ClubId = databaseClub.ClubId.ToString();
             newClub.ShortName = databaseClub.ShortName;
             newClub.LongName = databaseClub.LongName;
             newClub.Description = databaseClub.Description;
@@ -107,7 +107,7 @@ namespace NclArchiveApi.Controllers
             ReadOnlyCollection<TeamsInClubResult> databaseTeams = await _teamRepository.GetTeamsInClubAsync(clubId);
 
             Club club = new Club();
-            club.ClubId = databaseClub.ClubId;
+            club.ClubId = databaseClub.ClubId.ToString();
             club.ShortName = databaseClub.ShortName;
             club.Link = Url.Content("~/") + "club/" + club.ClubId;
 

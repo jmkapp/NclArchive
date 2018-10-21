@@ -43,7 +43,7 @@ namespace NclArchiveApi.Controllers
             if (databaseTeam.Club != null)
             {
                 club = new Club();
-                club.ClubId = databaseTeam.Club.ClubId;
+                club.ClubId = databaseTeam.Club.ClubId.ToString();
                 club.ShortName = databaseTeam.Club.ShortName;
                 club.Link = Url.Content("~/") + "club/" + databaseTeam.Club.ClubId;
             }

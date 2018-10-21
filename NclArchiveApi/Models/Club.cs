@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
-using DatabaseAccess.ExternalModel;
 using Newtonsoft.Json;
 
 namespace NclArchiveApi.Models
@@ -49,11 +47,11 @@ namespace NclArchiveApi.Models
         internal static Club Convert(DatabaseAccess.ExternalModel.Club club)
         {
             Club newClub = new Club();
-            newClub.ClubId = club.ClubId;
+            newClub.ClubId = club.ClubId.ToString();
             newClub.ShortName = club.ShortName;
             newClub.LongName = club.LongName;
             newClub.Description = club.Description;
-            newClub.VenueId = club.VenueId;
+            newClub.VenueId = club.VenueId?.ToString();
             newClub.Url = club.Url;
             newClub.ImageFile = club.ImageFile;
             newClub.ContactName = club.ContactName;
@@ -63,8 +61,8 @@ namespace NclArchiveApi.Models
             newClub.Postcode = club.Postcode;
             newClub.Telephone = club.Telephone;
             newClub.Fax = club.Fax;
-            newClub.CustomerId = club.CustomerId;
-            newClub.AssociationId = club.AssociationId;
+            newClub.CustomerId = club.CustomerId?.ToString();
+            newClub.AssociationId = club.AssociationId?.ToString();
 
             return newClub;
         }
