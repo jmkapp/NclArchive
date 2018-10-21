@@ -34,15 +34,10 @@ namespace DatabaseAccess.Repositories
             return newGame;
         }
 
-        public async Task<ReadOnlyCollection<TeamGameResult>> GetGamesAsync(string teamReference,
-            string seasonReference)
+        public async Task<ReadOnlyCollection<TeamGameResult>> GetGamesAsync(int teamId,
+            int seasonId)
         {
             List<TeamGameResult> games = new List<TeamGameResult>();
-
-            bool teamConverts = int.TryParse(teamReference, out int teamId);
-            bool seasonConverts = int.TryParse(seasonReference, out int seasonId);
-
-            if (!teamConverts || !seasonConverts) return null;
 
             using (var context = new DatabaseContext())
             {

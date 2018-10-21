@@ -90,12 +90,18 @@ namespace NclArchiveApi.Controllers
         [Route("games")]
         [HttpGet]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        public async Task<IHttpActionResult> Get(string teamId, string seasonId)
+        public async Task<IHttpActionResult> Get(string teamReference, string seasonReference)
         {
             Authorizer authorizer = new Authorizer(Request.Headers.Authorization);
 
             if (!authorizer.Authorized)
                 return Content(HttpStatusCode.Unauthorized, authorizer.RejectionMessage);
+
+            bool teamIdConverts = int.TryParse(teamReference, out int teamId);
+            bool seasonIdConverts = int.TryParse(seasonReference, out int seasonId);
+
+            if (teamIdConverts == false || seasonIdConverts == false)
+                return BadRequest();
 
             ReadOnlyCollection<TeamGameResult> results = await _gameRepository.GetGamesAsync(teamId, seasonId);
 
