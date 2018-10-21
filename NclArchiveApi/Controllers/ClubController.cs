@@ -59,7 +59,7 @@ namespace NclArchiveApi.Controllers
             return Ok(clubList);
         }
 
-        [Route("club/{clubId}")]
+        [Route("club/{clubReference}")]
         [HttpGet]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         public async Task<IHttpActionResult> Get(string clubReference)
@@ -98,7 +98,7 @@ namespace NclArchiveApi.Controllers
             return Ok(newClub);
         }
 
-        [Route("club/{clubId}/teams")]
+        [Route("club/{clubReference}/teams")]
         [HttpGet]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         public async Task<IHttpActionResult> GetTeamsInClub(string clubReference)

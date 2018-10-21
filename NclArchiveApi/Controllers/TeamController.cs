@@ -21,7 +21,7 @@ namespace NclArchiveApi.Controllers
             _teamRepository = teamRepository;
         }
 
-        [Route("team/{teamId}")]
+        [Route("team/{teamReference}")]
         [HttpGet]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         public async Task<IHttpActionResult> Get(string teamReference)
@@ -67,7 +67,7 @@ namespace NclArchiveApi.Controllers
             return Ok(newTeam);
         }
 
-        [Route("team/{teamId}/seasons")]
+        [Route("team/{teamReference}/seasons")]
         [HttpGet]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         public async Task<IHttpActionResult> GetSeasons(string teamReference)
