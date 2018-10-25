@@ -1,0 +1,367 @@
+{
+	"info": {
+		"_postman_id": "f23a52ae-8d30-472c-807e-2d8895b6e8a4",
+		"name": "NclArchive",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Clubs",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{apiPassword}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "jezzer",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{url}}/clubs",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"clubs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Home",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{apiPassword}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "jezzer",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{url}}",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Club",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{apiPassword}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "jezzer",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{url}}/club/6",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"club",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Division",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{apiPassword}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "jezzer",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{url}}/division/3",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"division",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Game",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{apiPassword}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "jezzer",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{url}}/game/6",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"game",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Venue",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{apiPassword}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "jezzer",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{url}}/venue/6",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"venue",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Team",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{apiPassword}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "jezzer",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{url}}/team/6",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"team",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Season",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{apiPassword}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "jezzer",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{url}}/season/6",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"season",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Games",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{apiPassword}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "jezzer",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{url}}/games?teamId=26&seasonId=45",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"games"
+					],
+					"query": [
+						{
+							"key": "teamId",
+							"value": "26"
+						},
+						{
+							"key": "seasonId",
+							"value": "45"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
