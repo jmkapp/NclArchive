@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using DatabaseAccess.InternalModel;
 using DatabaseAccess.Repositories.Interfaces;
 using SeasonsForTeamResult = DatabaseAccess.InternalModel.StoredProcedureResults.SeasonsForTeamResult;
 using TeamsInClubResult = DatabaseAccess.InternalModel.StoredProcedureResults.TeamsInClubResult;
@@ -44,7 +46,7 @@ namespace DatabaseAccess.Repositories
 
             using (var context = new DatabaseContext())
             {
-                var databaseTeams = await context.Database.SqlQuery<TeamsInClubResult>(
+                List<TeamsInClubResult> databaseTeams = await context.Database.SqlQuery<TeamsInClubResult>(
                     "dbo.api_GetTeamsinClubID @clubId",
                     new SqlParameter("clubId", clubId)).ToListAsync();
 
@@ -54,8 +56,7 @@ namespace DatabaseAccess.Repositories
                         team.TeamId,
                         team.TeamName,
                         team.NclTeam == "NCL",
-                        team.LongName
-                    );
+                        team.LongName);
 
                     teams.Add(newTeam);
                 }

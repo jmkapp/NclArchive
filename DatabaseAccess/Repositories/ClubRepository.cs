@@ -16,7 +16,7 @@ namespace DatabaseAccess.Repositories
 
             using (var context = new DatabaseContext())
             {
-                var databaseClubs = await context.Database.SqlQuery<GetClubsResult>("dbo.api_GetAllClubs").ToListAsync();
+                List<GetClubsResult> databaseClubs = await context.Database.SqlQuery<GetClubsResult>("dbo.api_GetAllClubs").ToListAsync();
 
                 foreach (GetClubsResult databaseClub in databaseClubs)
                 {

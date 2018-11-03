@@ -41,7 +41,7 @@ namespace DatabaseAccess.Repositories
 
             using (var context = new DatabaseContext())
             {
-                var databaseGames = await context.Database.SqlQuery<InternalModel.StoredProcedureResults.TeamGameResult>(
+                List<InternalModel.StoredProcedureResults.TeamGameResult> databaseGames = await context.Database.SqlQuery<InternalModel.StoredProcedureResults.TeamGameResult>(
                     "dbo.api_GetTeamGames_asc @teamId, @seasonId",
                     new SqlParameter("teamId", teamId),
                     new SqlParameter("seasonId", seasonId)).ToListAsync();

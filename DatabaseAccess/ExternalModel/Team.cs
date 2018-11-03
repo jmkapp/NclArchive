@@ -1,4 +1,6 @@
-﻿namespace DatabaseAccess.ExternalModel
+﻿using System;
+
+namespace DatabaseAccess.ExternalModel
 {
     public class Team
     {
@@ -99,8 +101,7 @@
                 team.Url,
                 team.SponsorsName,
                 team.SponsorsUrl,
-                team.MiniName
-                );
+                team.MiniName);
         }
     }
 }

@@ -7,6 +7,6 @@ namespace DatabaseAccess.Repositories.Interfaces
     public interface IClubRepository
     {
         Task<ReadOnlyCollection<AllClubsResult>> GetAllClubsAsync();
-        Task<ExternalModel.Club> GetClubAsync(int clubReference);
+        Task<ExternalModel.Club> GetClubAsync(int clubId);
     }
 }
