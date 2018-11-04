@@ -62,11 +62,14 @@
     <Compile Include="InternalModel\Division.cs" />
     <Compile Include="InternalModel\Game.cs" />
     <Compile Include="Repositories\Cache\CachedClubRepository.cs" />
+    <Compile Include="Repositories\Cache\CachedDivisionRepository.cs" />
     <Compile Include="Repositories\Cache\CachedGameRepository.cs" />
+    <Compile Include="Repositories\Cache\CachedSeasonRepository.cs" />
     <Compile Include="Repositories\Cache\CachedSeasonsForTeamResult.cs" />
     <Compile Include="Repositories\Cache\CachedTeamGameResult.cs" />
     <Compile Include="Repositories\Cache\CachedTeamRepository.cs" />
     <Compile Include="Repositories\Cache\CachedTeamsInClubResult.cs" />
+    <Compile Include="Repositories\Cache\CachedVenueRepository.cs" />
     <Compile Include="Repositories\DivisionRepository.cs" />
     <Compile Include="Repositories\Interfaces\IDivisionRepository.cs" />
     <Compile Include="Repositories\Interfaces\ISeasonRepository.cs" />

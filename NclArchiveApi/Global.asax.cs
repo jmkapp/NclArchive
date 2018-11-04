@@ -1,5 +1,4 @@
 ﻿using System.Web.Http;
-using DatabaseAccess.Repositories;
 using DatabaseAccess.Repositories.Cache;
 using DatabaseAccess.Repositories.Interfaces;
 using SimpleInjector;
@@ -18,9 +17,9 @@ namespace NclArchiveApi
             container.Register<IClubRepository, CachedClubRepository>(Lifestyle.Singleton);
             container.Register<ITeamRepository, CachedTeamRepository>(Lifestyle.Singleton);
             container.Register<IGameRepository, CachedGameRepository>(Lifestyle.Singleton);
-            container.Register<ISeasonRepository, SeasonRepository>(Lifestyle.Singleton);
-            container.Register<IDivisionRepository, DivisionRepository>(Lifestyle.Singleton);
-            container.Register<IVenueRepository, VenueRepository>(Lifestyle.Singleton);
+            container.Register<ISeasonRepository, CachedSeasonRepository>(Lifestyle.Singleton);
+            container.Register<IDivisionRepository, CachedDivisionRepository>(Lifestyle.Singleton);
+            container.Register<IVenueRepository, CachedVenueRepository>(Lifestyle.Singleton);
 
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
 
