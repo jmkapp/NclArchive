@@ -47,7 +47,8 @@ namespace NclArchiveApi.Controllers
                 club = new Club();
                 club.ClubId = databaseTeam.Club.ClubId;
                 club.ShortName = databaseTeam.Club.ShortName;
-                club.Link = Url.Content("~/") + "club/" + databaseTeam.Club.ClubId;
+                //club.Link = Url.Content("~/") + "club/" + databaseTeam.Club.ClubId;
+                club.Link = Url.Content("~/") + "clubx/" + databaseTeam.Club.ClubId;
             }
 
             Team newTeam = new Team();
