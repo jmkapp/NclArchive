@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using DatabaseAccess.ExternalModel.QueryResults;
 using DatabaseAccess.Repositories.Interfaces;
+using NclArchiveApi.Filters;
 using NclArchiveApi.Models.Lists;
 using Division = NclArchiveApi.Models.Division;
 using Season = NclArchiveApi.Models.Season;
@@ -15,6 +16,7 @@ using Game = NclArchiveApi.Models.Game;
 
 namespace NclArchiveApi.Controllers
 {
+    [BasicAuthentication]
     public class GameController : ApiController
     {
         private readonly IGameRepository _gameRepository;
@@ -29,11 +31,6 @@ namespace NclArchiveApi.Controllers
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         public async Task<IHttpActionResult> Get(string gameReference)
         {
-            Authorizer authorizer = new Authorizer(Request.Headers.Authorization);
-
-            if (!authorizer.Authorized)
-                return Content(HttpStatusCode.Unauthorized, authorizer.RejectionMessage);
-
             bool converts = int.TryParse(gameReference, out int gameId);
 
             if (converts == false)
@@ -92,11 +89,6 @@ namespace NclArchiveApi.Controllers
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         public async Task<IHttpActionResult> Get(string teamId, string seasonId)
         {
-            Authorizer authorizer = new Authorizer(Request.Headers.Authorization);
-
-            if (!authorizer.Authorized)
-                return Content(HttpStatusCode.Unauthorized, authorizer.RejectionMessage);
-
             bool teamIdConverts = int.TryParse(teamId, out int teamRef);
             bool seasonIdConverts = int.TryParse(seasonId, out int seasonRef);
 

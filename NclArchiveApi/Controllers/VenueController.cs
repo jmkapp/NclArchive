@@ -1,11 +1,12 @@
-﻿using System.Net;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using DatabaseAccess.Repositories.Interfaces;
+using NclArchiveApi.Filters;
 
 namespace NclArchiveApi.Controllers
 {
+    [BasicAuthentication]
     public class VenueController : ApiController
     {
         private readonly IVenueRepository _venueRepository;
@@ -20,11 +21,6 @@ namespace NclArchiveApi.Controllers
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         public async Task<IHttpActionResult> Get(string venueReference)
         {
-            Authorizer authorizer = new Authorizer(Request.Headers.Authorization);
-
-            if (!authorizer.Authorized)
-                return Content(HttpStatusCode.Unauthorized, authorizer.RejectionMessage);
-
             bool converts = int.TryParse(venueReference, out int venueId);
 
             if (converts == false)

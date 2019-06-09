@@ -96,7 +96,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\Authorizer.cs" />
     <Compile Include="Controllers\ClubController.cs" />
     <Compile Include="Controllers\DivisionController.cs" />
     <Compile Include="Controllers\GameController.cs" />
@@ -104,6 +103,7 @@
     <Compile Include="Controllers\SeasonController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Controllers\VenueController.cs" />
+    <Compile Include="Filters\BasicAuthenticationAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

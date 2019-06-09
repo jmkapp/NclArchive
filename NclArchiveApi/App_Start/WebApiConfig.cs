@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Http;
+using NclArchiveApi.Filters;
 using Newtonsoft.Json;
 
 namespace NclArchiveApi
@@ -29,6 +30,8 @@ namespace NclArchiveApi
                 routeTemplate: "{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.Filters.Add(new BasicAuthenticationAttribute());
         }
     }
 }

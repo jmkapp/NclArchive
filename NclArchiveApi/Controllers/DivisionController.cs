@@ -2,11 +2,12 @@
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using DatabaseAccess.Repositories;
 using DatabaseAccess.Repositories.Interfaces;
+using NclArchiveApi.Filters;
 
 namespace NclArchiveApi.Controllers
 {
+    [BasicAuthentication]
     public class DivisionController : ApiController
     {
         private readonly IDivisionRepository _divisionRepository;
@@ -21,11 +22,6 @@ namespace NclArchiveApi.Controllers
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         public async Task<IHttpActionResult> Get(string divisionReference)
         {
-            Authorizer authorizer = new Authorizer(Request.Headers.Authorization);
-
-            if (!authorizer.Authorized)
-                return Content(HttpStatusCode.Unauthorized, authorizer.RejectionMessage);
-
             bool converts = int.TryParse(divisionReference, out int divisionId);
 
             if (converts == false)

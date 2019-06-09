@@ -6,12 +6,14 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using DatabaseAccess.ExternalModel.QueryResults;
 using DatabaseAccess.Repositories.Interfaces;
+using NclArchiveApi.Filters;
 using Club = NclArchiveApi.Models.Club;
 using Season = NclArchiveApi.Models.Season;
 using Team = NclArchiveApi.Models.Team;
 
 namespace NclArchiveApi.Controllers
 {
+    [BasicAuthentication]
     public class TeamController : ApiController
     {
         private readonly ITeamRepository _teamRepository;
@@ -26,11 +28,6 @@ namespace NclArchiveApi.Controllers
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         public async Task<IHttpActionResult> Get(string teamReference)
         {
-            Authorizer authorizer = new Authorizer(Request.Headers.Authorization);
-
-            if (!authorizer.Authorized)
-                return Content(HttpStatusCode.Unauthorized, authorizer.RejectionMessage);
-
             bool converts = int.TryParse(teamReference, out int teamId);
 
             if (converts == false)
@@ -73,11 +70,6 @@ namespace NclArchiveApi.Controllers
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         public async Task<IHttpActionResult> GetSeasons(string teamReference)
         {
-            Authorizer authorizer = new Authorizer(Request.Headers.Authorization);
-
-            if (!authorizer.Authorized)
-                return Content(HttpStatusCode.Unauthorized, authorizer.RejectionMessage);
-
             bool converts = int.TryParse(teamReference, out int teamId);
 
             if (converts == false)

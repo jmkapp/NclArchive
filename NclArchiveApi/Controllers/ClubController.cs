@@ -1,19 +1,18 @@
-﻿using DatabaseAccess.Repositories;
-using NclArchiveApi.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using DatabaseAccess.ExternalModel;
 using DatabaseAccess.ExternalModel.QueryResults;
 using DatabaseAccess.Repositories.Interfaces;
+using NclArchiveApi.Filters;
 using NclArchiveApi.Models.Lists;
 using Club = NclArchiveApi.Models.Club;
 
 namespace NclArchiveApi.Controllers
 {
+    [BasicAuthentication]
     public class ClubController : ApiController
     {
         private readonly IClubRepository _clubRepository;
@@ -30,11 +29,6 @@ namespace NclArchiveApi.Controllers
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         public async Task<IHttpActionResult> Get()
         {
-            Authorizer authorizer = new Authorizer(Request.Headers.Authorization);
-
-            if (!authorizer.Authorized)
-                return Content(HttpStatusCode.Unauthorized, authorizer.RejectionMessage);
-
             ReadOnlyCollection<AllClubsResult> clubs = await _clubRepository.GetAllClubsAsync();
 
             List<Club> newClubs = new List<Club>();
@@ -64,11 +58,6 @@ namespace NclArchiveApi.Controllers
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         public async Task<IHttpActionResult> Get(string clubReference)
         {
-            Authorizer authorizer = new Authorizer(Request.Headers.Authorization);
-
-            if (!authorizer.Authorized)
-                return Content(HttpStatusCode.Unauthorized, authorizer.RejectionMessage);
-
             bool converts = int.TryParse(clubReference, out int clubId);
 
             if (converts == false)
@@ -103,11 +92,6 @@ namespace NclArchiveApi.Controllers
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         public async Task<IHttpActionResult> GetTeamsInClub(string clubReference)
         {
-            Authorizer authorizer = new Authorizer(Request.Headers.Authorization);
-
-            if (!authorizer.Authorized)
-                return Content(HttpStatusCode.Unauthorized, authorizer.RejectionMessage);
-
             bool converts = int.TryParse(clubReference, out int clubId);
 
             if (converts == false)

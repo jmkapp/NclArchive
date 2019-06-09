@@ -8,6 +8,7 @@ using NclArchiveApi.Models.Lists;
 
 namespace NclArchiveApi.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : ApiController
     {
         [Route("")]
